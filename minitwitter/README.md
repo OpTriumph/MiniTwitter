@@ -1,70 +1,66 @@
-# Getting Started with Create React App
+# 2021 COSE490 Mini Twitter
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 현재까지 구현된 기능
 
-## Available Scripts
+- 기본적 마크업 페이지 제작
+- 로그인 화면으로 접속하여 로그인 버튼을 누르면 home으로 접속
+- 왼쪽 메뉴의 home, profile을 클릭하면 각각의 페이지로 이동
+- 트윗 버튼을 누르면 다이얼로그 창이 나와 트윗 입력 가능
 
-In the project directory, you can run:
+## Setup
 
-### `yarn start`
+- next.js
+  - next CRA 사용
+  ```
+  npx create-next-app
+  ```
+  - node*modules에 설치 *(package.json 설정 변경 필요)\_
+  ```
+  yarn add next
+  ```
+- material-ui
+  ```
+  yarn add @material-ui/core
+  yarn add @material-ui/icons
+  ```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## 실행
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+```
+yarn dev
+```
 
-### `yarn test`
+자동으로 페이지가 열리지 않으므로 주소창에 http://localhost:3000/ 을 입력하여 확인
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 폴더와 파일 구조
 
-### `yarn build`
+```
+|
++-- component                    (페이지에 사용되는 component들을 분리한 폴더)
+|      +-- InfoBox.js            (home 페이지 오른쪽 시간, 날씨 박스)
+|      +-- Twit.js               (home 페이지 트윗과 타임라인 표시)
+|      +-- TwitDialog.js         (트윗버튼 클릭시 나오는 트윗 작성 다이얼로그)
+|      +-- TwitMenu.js           (home과 profile 페이지 왼쪽의 메뉴들)
+|      +-- TwitProfile.js        (profile 페이지)
+|
++-- pages                        (각 웹페이지들을 포함하는 폴더)
+|      +-- _app.js               (title, theme 색상 지정)
+|      +-- _docmument.js         (material-ui link 적용)
+|      +-- home.js               (트위터 homepage)
+|      +-- index.js              (로그인 페이지. 처음 이 페이지가 열림)
+|      +-- profile.js            (프로필 페이지)
+|
++--public                                      (페이지에서 사용할 이미지파일들)
+       +-- btnG_완성형.png                     (네이버 로그인 이미지)
+       +-- kakao_login_medium_narrow.png       (카카오 로그인 이미지)
+       +-- weather.jpg                         (시간 날씨 박스에 나타나는 이미지)
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 참고 사이트 & 코드
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- next.js: https://nextjs.org/
+- material-ui: https://material-ui.com/
+- nextjs + material-ui: https://github.com/mui-org/material-ui/tree/next/examples/nextjs
+- material-ui signin template: https://github.com/mui-org/material-ui/tree/master/docs/src/pages/getting-started/templates/sign-in
+- Naver api(로그인 이미지):https://developers.naver.com/docs/login/bi/bi.md
+- Kakao api(로그인 이미지): https://developers.kakao.com/tool/resource/login
