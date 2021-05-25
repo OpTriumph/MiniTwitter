@@ -8,9 +8,9 @@
 - 트윗 버튼을 누르면 다이얼로그 창이 나와 트윗 입력 가능
 - 
 ------------Trying to implement simple functions with redux------------
-- Can Post new tweets and will showup in the "newest tweet"section.
+- Can Post new tweets and will showup in the "newest tweet" section.
 - Can Like the tweets
-- Can delete the tweets
+- Can Delete the tweets
 
 
 ## Setup
@@ -39,7 +39,7 @@
 - redux
 - reduxjs/toolkit
   ```
-  yarn @reduxjs/toolkit redux react-redux
+  yarn add @reduxjs/toolkit redux react-redux
   ```
 ## 실행
 
@@ -70,6 +70,7 @@ yarn dev
 +-- redux
 |      +-- store.js              (Store configuration)
 |      +-- tweets.js             (Reducer)
+|
 +--public                                      (페이지에서 사용할 이미지파일들)
        +-- btnG_완성형.png                     (네이버 로그인 이미지)
        +-- kakao_login_medium_narrow.png       (카카오 로그인 이미지)
