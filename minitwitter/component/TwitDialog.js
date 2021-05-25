@@ -22,7 +22,12 @@ export default function TwitDialog({ addTweet, open, handleClose }) {
     if (event.type !== "click") {
       return;
     }
+    if (text === "") {
+      return;
+    }
+    handleClose();
     addTweet(text);
+    setText("");
   };
 
   return (
@@ -61,7 +66,6 @@ export default function TwitDialog({ addTweet, open, handleClose }) {
 
       <DialogActions>
         <Button
-          // onClick={handleClose}
           color="primary"
           variant="contained"
           size="large"

@@ -9,6 +9,8 @@ import TwitMenu from "../component/TwitMenu.js";
 import { v4 as uuid } from "uuid";
 import { useState } from "react";
 export default function Home() {
+  const timestamp = require("time-stamp");
+
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -23,8 +25,11 @@ export default function Home() {
     {
       id: "1111",
       text: "this is ",
-      likes: 0,
-      comments: [],
+      like: 0,
+      retweet: 0,
+      mention: [],
+      user: "React",
+      time: "May 25",
     },
   ];
 
@@ -33,18 +38,38 @@ export default function Home() {
     const tweet = {
       id: uuid(),
       text,
-      // likes,
+      like: 0,
+      retweet: 0,
+      mention: [],
+      user: "",
+      time: timestamp("YYYY/MM/DD:mm:ss"),
     };
     const newTweets = [...tweets, tweet];
     setTweets(newTweets);
   };
 
+  const likeTweet = (id) => {
+    const newTweet = tweets.map((tweet) => {
+      if (tweet.id === id) return { ...tweet, like: tweet.like + 1 };
+      return tweet;
+    });
+    setTweets(newTweet);
+  };
+
+  const deleteTweet = (id) => {
+    const newTweets = tweets.filter((tweet) => tweet.id !== id);
+    setTweets(newTweets);
+  };
   return (
     <Container maxWidth="lg">
       <Grid container spacing={2}>
         <TwitMenu handleClickOpen={handleClickOpen} />
 
-        <TwitLine tweets={tweets} />
+        <TwitLine
+          tweets={tweets}
+          likeTweet={likeTweet}
+          deleteTweet={deleteTweet}
+        />
         <InfoBox />
       </Grid>
 

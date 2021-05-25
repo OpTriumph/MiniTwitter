@@ -22,8 +22,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Twit({ tweet }) {
-  const { id, text, likes } = tweet || {};
+function Twit({ tweet, likeTweet, deleteTweet }) {
+  const { id, text, like, retweet, mention, time, user } = tweet || {};
   const classes = useStyles();
   return (
     <Card>
@@ -34,19 +34,19 @@ function Twit({ tweet }) {
           </IconButton>
         }
         action={
-          <IconButton aria-label="delete">
+          <IconButton aria-label="delete" onClick={() => deleteTweet(id)}>
             <ClearIcon />
           </IconButton>
         }
         title={
           <Typhography variant="h6">
-            <b>임시 유저1</b>
+            <b>{user}</b>
           </Typhography>
         }
         subheader={
           <>
             <Typhography variant="body2" component="span">
-              @TempUser1 · May 25
+              @{user} · {time}
             </Typhography>
           </>
         }
@@ -60,28 +60,35 @@ function Twit({ tweet }) {
           <ChatBubbleOutlineIcon />
         </IconButton>
         <Typography component="span" variant="body2">
-          0
+          {mention}
         </Typography>
 
         <IconButton aria-label="retweet" component="span">
           <RepeatIcon />
         </IconButton>
         <Typography component="span" variant="body2">
-          14
+          {retweet}
         </Typography>
 
-        <IconButton aria-label="like" component="span">
+        <IconButton
+          aria-label="like"
+          component="span"
+          onClick={() => likeTweet(id)}
+        >
           <FavoriteBorderIcon />
         </IconButton>
         <Typography component="span" variant="body2">
-          {likes}
+          {like}
         </Typography>
       </CardActions>
     </Card>
   );
 }
 
-export default function TwitLine({ tweets = [] }) {
+export default function TwitLine({ tweets = [], likeTweet, deleteTweet }) {
+  // const [like, setLike] = React.useState(0);
+  if (tweets.length < 1) return null;
+
   const classes = useStyles();
   return (
     <Grid item xs>
@@ -91,7 +98,12 @@ export default function TwitLine({ tweets = [] }) {
       <Twit />
       <Paper variant="outlined" className={classes.paper}>
         {tweets.map((tweet) => (
-          <Twit key={tweet.id} tweet={tweet} />
+          <Twit
+            key={tweet.id}
+            tweet={tweet}
+            likeTweet={likeTweet}
+            deleteTweet={deleteTweet}
+          />
         ))}
       </Paper>
     </Grid>
