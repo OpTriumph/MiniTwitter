@@ -10,7 +10,21 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Grid from "@material-ui/core/Grid";
 
-export default function TwitDialog({ open, handleClose }) {
+import { useState } from "react";
+export default function TwitDialog({ addTweet, open, handleClose }) {
+  const [text, setText] = useState("");
+
+  const handleChange = (event) => {
+    setText(event.target.value);
+  };
+
+  const handleTweet = (event) => {
+    if (event.type !== "click") {
+      return;
+    }
+    addTweet(text);
+  };
+
   return (
     <Dialog
       open={open}
@@ -36,6 +50,8 @@ export default function TwitDialog({ open, handleClose }) {
               autoFocus
               multiline
               rows={9}
+              value={text}
+              onChange={handleChange}
               placeholder="무슨일이 일어나고 있나요?"
               fullWidth
             />
@@ -45,10 +61,11 @@ export default function TwitDialog({ open, handleClose }) {
 
       <DialogActions>
         <Button
-          onClick={handleClose}
+          // onClick={handleClose}
           color="primary"
           variant="contained"
           size="large"
+          onClick={handleTweet}
         >
           트윗
         </Button>

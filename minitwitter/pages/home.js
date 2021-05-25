@@ -6,6 +6,8 @@ import InfoBox from "../component/InfoBox.js";
 import TwitDialog from "../component/TwitDialog.js";
 import TwitMenu from "../component/TwitMenu.js";
 
+import { v4 as uuid } from "uuid";
+import { useState } from "react";
 export default function Home() {
   const [open, setOpen] = React.useState(false);
 
@@ -16,16 +18,37 @@ export default function Home() {
   const handleClose = () => {
     setOpen(false);
   };
+
+  const MOCK_DATA = [
+    {
+      id: "1111",
+      text: "this is ",
+      likes: 0,
+      comments: [],
+    },
+  ];
+
+  const [tweets, setTweets] = useState(MOCK_DATA);
+  const addTweet = (text) => {
+    const tweet = {
+      id: uuid(),
+      text,
+      // likes,
+    };
+    const newTweets = [...tweets, tweet];
+    setTweets(newTweets);
+  };
+
   return (
     <Container maxWidth="lg">
       <Grid container spacing={2}>
         <TwitMenu handleClickOpen={handleClickOpen} />
 
-        <TwitLine />
+        <TwitLine tweets={tweets} />
         <InfoBox />
       </Grid>
 
-      <TwitDialog handleClose={handleClose} open={open} />
+      <TwitDialog addTweet={addTweet} handleClose={handleClose} open={open} />
     </Container>
   );
 }

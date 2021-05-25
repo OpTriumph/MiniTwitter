@@ -22,7 +22,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Twit() {
+function Twit({ tweet }) {
+  const { id, text, likes } = tweet || {};
   const classes = useStyles();
   return (
     <Card>
@@ -51,7 +52,7 @@ function Twit() {
         }
       />
       <CardContent>
-        <Typhography variant="body1">무슨 일이 일어나고 있나요?</Typhography>
+        <Typhography variant="body1">{text}</Typhography>
       </CardContent>
 
       <CardActions>
@@ -73,14 +74,14 @@ function Twit() {
           <FavoriteBorderIcon />
         </IconButton>
         <Typography component="span" variant="body2">
-          33
+          {likes}
         </Typography>
       </CardActions>
     </Card>
   );
 }
 
-export default function TwitLine() {
+export default function TwitLine({ tweets = [] }) {
   const classes = useStyles();
   return (
     <Grid item xs>
@@ -89,8 +90,9 @@ export default function TwitLine() {
       </Paper>
       <Twit />
       <Paper variant="outlined" className={classes.paper}>
-        <Twit />
-        <Twit />
+        {tweets.map((tweet) => (
+          <Twit key={tweet.id} tweet={tweet} />
+        ))}
       </Paper>
     </Grid>
   );
