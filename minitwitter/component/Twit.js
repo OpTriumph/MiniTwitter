@@ -15,6 +15,8 @@ import CardHeader from "@material-ui/core/CardHeader";
 import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
 
+import { useDispatch } from "react-redux";
+import { likeTweet, deleteTweet } from "../redux/tweets";
 const useStyles = makeStyles((theme) => ({
   paper: {
     padding: theme.spacing(2),
@@ -22,7 +24,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Twit({ tweet, likeTweet, deleteTweet }) {
+function Twit({ tweet }) {
+  const dispatch = useDispatch();
   const { id, text, like, retweet, mention, time, user } = tweet || {};
   const classes = useStyles();
   return (
@@ -34,7 +37,10 @@ function Twit({ tweet, likeTweet, deleteTweet }) {
           </IconButton>
         }
         action={
-          <IconButton aria-label="delete" onClick={() => deleteTweet(id)}>
+          <IconButton
+            aria-label="delete"
+            onClick={() => dispatch(deleteTweet(id))}
+          >
             <ClearIcon />
           </IconButton>
         }
@@ -73,7 +79,7 @@ function Twit({ tweet, likeTweet, deleteTweet }) {
         <IconButton
           aria-label="like"
           component="span"
-          onClick={() => likeTweet(id)}
+          onClick={() => dispatch(likeTweet(id))}
         >
           <FavoriteBorderIcon />
         </IconButton>
@@ -95,7 +101,12 @@ export default function TwitLine({ tweets = [], likeTweet, deleteTweet }) {
       <Paper variant="outlined" className={classes.paper}>
         <b>최신 트윗</b>
       </Paper>
-      <Twit />
+      <Twit
+        tweet={tweets[tweets.length - 1]}
+        likeTweet={likeTweet}
+        deleteTweet={deleteTweet}
+        key={tweets[tweets.length - 1].id}
+      />
       <Paper variant="outlined" className={classes.paper}>
         {tweets.map((tweet) => (
           <Twit

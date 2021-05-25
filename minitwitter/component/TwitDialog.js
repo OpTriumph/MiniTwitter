@@ -10,9 +10,14 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Grid from "@material-ui/core/Grid";
 
+import { addTweet } from "../redux/tweets";
+import { useDispatch } from "react-redux";
+
 import { useState } from "react";
-export default function TwitDialog({ addTweet, open, handleClose }) {
+export default function TwitDialog({ open, handleClose }) {
   const [text, setText] = useState("");
+  // const [image, setImage] = useState("");
+  const dispatch = useDispatch();
 
   const handleChange = (event) => {
     setText(event.target.value);
@@ -26,7 +31,7 @@ export default function TwitDialog({ addTweet, open, handleClose }) {
       return;
     }
     handleClose();
-    addTweet(text);
+    dispatch(addTweet(text));
     setText("");
   };
 
