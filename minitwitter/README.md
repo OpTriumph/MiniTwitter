@@ -6,6 +6,12 @@
 - 로그인 화면으로 접속하여 로그인 버튼을 누르면 home으로 접속
 - 왼쪽 메뉴의 home, profile을 클릭하면 각각의 페이지로 이동
 - 트윗 버튼을 누르면 다이얼로그 창이 나와 트윗 입력 가능
+- 
+------------Trying to implement simple functions with redux------------
+- Can Post new tweets and will showup in the "newest tweet"section.
+- Can Like the tweets
+- Can delete the tweets
+
 
 ## Setup
 
@@ -23,7 +29,18 @@
   yarn add @material-ui/core
   yarn add @material-ui/icons
   ```
+  
 
+- time-stamp
+  ```
+  npm install --save time-stamp
+  ```
+- react-redux
+- redux
+- reduxjs/toolkit
+  ```
+  yarn @reduxjs/toolkit redux react-redux
+  ```
 ## 실행
 
 ```
@@ -50,6 +67,9 @@ yarn dev
 |      +-- index.js              (로그인 페이지. 처음 이 페이지가 열림)
 |      +-- profile.js            (프로필 페이지)
 |
++-- redux
+|      +-- store.js              (Store configuration)
+|      +-- tweets.js             (Reducer)
 +--public                                      (페이지에서 사용할 이미지파일들)
        +-- btnG_완성형.png                     (네이버 로그인 이미지)
        +-- kakao_login_medium_narrow.png       (카카오 로그인 이미지)
@@ -64,3 +84,7 @@ yarn dev
 - material-ui signin template: https://github.com/mui-org/material-ui/tree/master/docs/src/pages/getting-started/templates/sign-in
 - Naver api(로그인 이미지):https://developers.naver.com/docs/login/bi/bi.md
 - Kakao api(로그인 이미지): https://developers.kakao.com/tool/resource/login
+- redux.js https://redux.js.org/
+- react-redux.js https://react-redux.js.org/
+- react-Toolkit.js https://redux-toolkit.js.org/
+
