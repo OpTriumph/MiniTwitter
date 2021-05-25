@@ -13,6 +13,7 @@ const MOCK_DATA = [
     time: "May 25",
   },
 ];
+
 export const addTweet = createAction("tweets/add");
 export const deleteTweet = createAction("tweets/delete");
 export const likeTweet = createAction("tweets/like");
@@ -41,39 +42,3 @@ export const tweetsReducer = createReducer(MOCK_DATA, (builder) => {
       state.splice(index, 1);
     });
 });
-// const [mention, setMention] = useState("");
-
-// const addTweet = (text) => {
-//   const tweet = {
-//     id: uuid(),
-//     text,
-//     like: 0,
-//     retweet: 0,
-//     mention: [],
-//     user: "",
-//     time: timestamp("YYYY/MM/DD:mm:ss"),
-//   };
-//   const newTweets = [...tweets, tweet];
-//   setTweets(newTweets);
-// };
-
-// const likeTweet = (id) => {
-//   const newTweet = tweets.map((tweet) => {
-//     if (tweet.id === id) return { ...tweet, like: tweet.like + 1 };
-//     return tweet;
-//   });
-//   setTweets(newTweet);
-// };
-
-// const doRetweet = (id) => {
-//   const newTweet = tweets.map((tweet) => {
-//     if (tweet.id === id) return { ...tweet, like: tweet.like + 1 };
-//     return tweet;
-//   });
-//   setTweets(newTweet);
-// };
-
-// const deleteTweet = (id) => {
-//   const newTweets = tweets.filter((tweet) => tweet.id !== id);
-//   setTweets(newTweets);
-// };
