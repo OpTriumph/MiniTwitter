@@ -41,6 +41,7 @@ export const userReducer = createReducer(initialState, (builder) => {
         loggedIn: true,
       };
       state = user;
+      user = [];
     })
     .addCase(logOut, (state, action) => {
       const user = {

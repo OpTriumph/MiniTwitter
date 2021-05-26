@@ -30,15 +30,10 @@ export default function SignInSide() {
   const handleLogin = (event) => {
     if (event.type !== "click") {
       return;
-    }
-    if (id === "") {
-      return;
-    }
-    if (password == "") {
+    } else if (id !== "" && password !== "") {
       return;
     }
     dispatch(logIn({ id, passward }));
-
     setId("");
     setPassward("");
   };
