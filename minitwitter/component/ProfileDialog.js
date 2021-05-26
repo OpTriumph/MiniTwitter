@@ -10,38 +10,46 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Grid from "@material-ui/core/Grid";
 
+import { changeInfo, changeName } from "../redux/user";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
 
-export default function ProfileDialog({ open, handleClose }) {
-  const [user, setUser] = useState("");
+export default function ProfileDialog({ openPro, handleClosePro }) {
+  const [name, setName] = useState("");
+  const [Info, setInfo] = useState("");
 
   const dispatch = useDispatch();
-  const handleChange = (event) => {
-    setUser(event.target.value);
-  };
 
-  const handleUserName = (event) => {
+  const handleUserProfile = (event) => {
     if (event.type !== "click") {
       return;
     }
-    if (text === "") {
-      return;
-    }
-    handleClose();
-    dispatch(add(text));
-    setText("");
+    handleClosePro();
+    dispatch(changeName(name));
+    dispatch(changeInfo(Info));
+    setInfo("");
+    setName("");
+  };
+
+  const handleUserInfo = (event) => {
+    setInfo(event.target.value);
+  };
+  const handleUserName = (event) => {
+    setName(event.target.value);
   };
 
   return (
     <Dialog
-      open={open}
-      onClose={handleClose}
+      open={openPro}
+      onClose={handleClosePro}
       aria-labelledby="new-twit-dialog"
-      fullWidth
     >
       <DialogTitle id="close">
-        <IconButton color="primary" aria-label="delete" onClick={handleClose}>
+        <IconButton
+          color="primary"
+          aria-label="delete"
+          onClick={handleClosePro}
+        >
           <ClearIcon />
         </IconButton>
       </DialogTitle>
@@ -57,10 +65,18 @@ export default function ProfileDialog({ open, handleClose }) {
               id="write-new-twit"
               autoFocus
               multiline
-              rows={9}
-              value={text}
-              onChange={handleChange}
-              placeholder="무슨일이 일어나고 있나요?"
+              rows={2}
+              onChange={handleUserName}
+              placeholder="Complete Your User Name"
+              fullWidth
+            />
+            <TextField
+              id="write-new-twit"
+              autoFocus
+              multiline
+              rows={4}
+              onChange={handleUserInfo}
+              placeholder="Complete Your Bio!"
               fullWidth
             />
           </Grid>
@@ -72,9 +88,9 @@ export default function ProfileDialog({ open, handleClose }) {
           color="primary"
           variant="contained"
           size="large"
-          onClick={handleTweet}
+          onClick={handleUserProfile}
         >
-          트윗
+          확인
         </Button>
       </DialogActions>
     </Dialog>

@@ -3,52 +3,39 @@ import { v4 as uuid } from "uuid";
 const timestamp = require("time-stamp");
 
 const MOCK_USER = {
-  userid: uuid(),
+  userid: "mockuser",
   userName: "MockUser1",
   tweets: [],
   userInfo: "This is the mock user",
-  follower: [],
-  following: [],
+  follower: ["a", "s", "s"],
+  following: ["d", "s", "s"],
   signUpDate: "2021/05/26 13:52:48",
 };
 
-const initialState = {
-  loggedIn: false,
-  user: null,
-  logInPayload: {},
-  signUpPayload: {},
-};
-
 export const signUp = createAction("user/signup");
-export const logIn = createAction("user/logIn");
-export const logOut = createAction("user/logOut");
+export const logIn = createAction("user/login");
+export const logOut = createAction("user/logout");
+export const changeName = createAction("user/changename");
+export const changeInfo = createAction("user/changeinfo");
 
-export const userReducer = createReducer(initialState, (builder) => {
+export const userReducer = createReducer(MOCK_USER, (builder) => {
   builder
     .addCase(signUp, (state, action) => {
-      const user = {
-        ...state,
-        signUpPayload: action.payload,
-        signUpDate: timestamp("YYYY/MM/DD HH:mm:ss"),
-      };
-      state = user;
+      (state.signUpPayload = action.payload),
+        (state.signUpDate = timestamp("YYYY/MM/DD HH:mm:ss"));
     })
     .addCase(logIn, (state, action) => {
-      const user = {
-        ...state,
-        logInPayload: action.payload,
-        user: MOCK_USER,
-        loggedIn: true,
-      };
-      state = user;
-      user = [];
+      (state.userid = action.payload),
+        (state.signUpDate = timestamp("YYYY/MM/DD HH:mm:ss")),
+        (state.loggedIn = true);
     })
     .addCase(logOut, (state, action) => {
-      const user = {
-        ...state,
-        user: null,
-        loggedIn: false,
-      };
-      state = user;
+      (state.user = null), (state.loggedIn = false);
+    })
+    .addCase(changeInfo, (state, action) => {
+      state.userInfo = action.payload;
+    })
+    .addCase(changeName, (state, action) => {
+      state.userName = action.payload;
     });
 });

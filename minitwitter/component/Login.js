@@ -1,9 +1,10 @@
 import React from "react";
 import Link from "next/link";
-import { useDispatch } from "react-redux";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core/styles";
+
+import { useDispatch } from "react-redux";
 import { useState } from "react";
 import { logIn } from "../redux/user";
 
@@ -28,14 +29,11 @@ export default function SignInSide() {
   };
 
   const handleLogin = (event) => {
-    if (event.type !== "click") {
-      return;
-    } else if (id !== "" && password !== "") {
-      return;
+    if (id === "" && password === "") {
+      event.preventDefualt();
     }
-    dispatch(logIn({ id, passward }));
-    setId("");
-    setPassward("");
+    dispatch(logIn(id));
+    //password.
   };
 
   const classes = useStyles();
@@ -49,6 +47,7 @@ export default function SignInSide() {
         id="ID"
         label="아이디"
         name="ID"
+        value={id}
         onChange={handleId}
         autoFocus
       />
@@ -59,11 +58,13 @@ export default function SignInSide() {
         fullWidth
         name="password"
         label="비밀번호"
+        value={password}
         onChange={handlePassward}
         type="password"
         id="password"
       />
       <Button color="primary">회원가입</Button>
+
       <Link href="home">
         <Button
           type="submit"

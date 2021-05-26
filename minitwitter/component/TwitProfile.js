@@ -20,30 +20,31 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function MyInfo() {
+function MyInfo({ follower, following, signUpDate }) {
   return (
     <Grid item container direction="row" spacing={4}>
       <Grid item>
         <Typography variant="body1" component="span">
-          <b>55</b> 팔로잉
+          <b>{following.length}</b> 팔로잉
         </Typography>
       </Grid>
       <Grid item>
         <Typography variant="body1" component="span">
-          <b>24</b> 팔로워
+          <b>{follower.length}</b> 팔로워
         </Typography>
       </Grid>
       <Grid item>
         <Typography variant="body1" component="span">
-          <b> 2021년 5월</b> 가입
+          <b> {signUpDate}</b> 가입
         </Typography>
       </Grid>
     </Grid>
   );
 }
 
-export default function TwitProfile(tweet) {
-  const { userid, userName, userInfo } = tweet.user || {};
+export default function TwitProfile({ User, handleClickOpenPro }) {
+  const { userid, userName, userInfo, follower, following, signUpDate } =
+    User || {};
 
   const classes = useStyles();
   return (
@@ -79,6 +80,7 @@ export default function TwitProfile(tweet) {
                 variant="outlined"
                 color="primary"
                 className={classes.profilebutton}
+                onClick={handleClickOpenPro}
               >
                 프로필 수정
               </Button>
@@ -99,7 +101,11 @@ export default function TwitProfile(tweet) {
             <Typography variant="body1">{userInfo}</Typography>
           </Grid>
 
-          <MyInfo />
+          <MyInfo
+            follower={follower}
+            following={following}
+            signUpDate={signUpDate}
+          />
         </Grid>
       </Paper>
     </Grid>

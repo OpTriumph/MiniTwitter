@@ -1,0 +1,107 @@
+[33mcommit 34308d97cdf0aa87aa6e0823cc9f5592f110cfd6[m[33m ([m[1;36mHEAD -> [m[1;32muserimplementation[m[33m)[m
+Author: Yang <justinalone@korea.ac.kr>
+Date:   Wed May 26 17:14:44 2021 +0900
+
+    simple login nonempty verification
+
+[33mcommit 039cf666f750c927c7617134f743a5409c41cda7[m
+Author: Yang <justinalone@korea.ac.kr>
+Date:   Wed May 26 15:27:14 2021 +0900
+
+    try to implement user reducer and login logic
+
+[33mcommit 692c1aa551f2b8047036de49fe77839ba8a636f2[m[33m ([m[1;31morigin/reduxing[m[33m, [m[1;32mreduxing[m[33m)[m
+Merge: 3000dc3 3b3c5bd
+Author: Yang <justinalone@korea.ac.kr>
+Date:   Wed May 26 11:46:50 2021 +0900
+
+    Merge branch 'reduxing' of https://github.com/OpTriumph/MiniTwitter into reduxing
+
+[33mcommit 3000dc3a9bcb29925f38e0f85e27c99de1f77684[m
+Author: Yang <justinalone@korea.ac.kr>
+Date:   Wed May 26 11:45:53 2021 +0900
+
+    tweet feed update with correct timestamp format
+
+[33mcommit 3b3c5bdd31723b96f8b632d1b5fe54544306d05a[m
+Author: Yang <79007969+OpTriumph@users.noreply.github.com>
+Date:   Wed May 26 02:57:37 2021 +0900
+
+    Update README.md
+
+[33mcommit 1d2e3e405816ab0fd5d1b6655167233cec21ff3b[m
+Author: Yang <79007969+OpTriumph@users.noreply.github.com>
+Date:   Wed May 26 02:55:34 2021 +0900
+
+    Update README.md
+
+[33mcommit bc3d7734269b2239414d72c689557beda35668d5[m
+Author: Yang <justinalone@korea.ac.kr>
+Date:   Wed May 26 02:37:09 2021 +0900
+
+    comment deletion
+
+[33mcommit f5723c3c7cc00ce334075b6bd73741ef4032e624[m
+Author: Yang <justinalone@korea.ac.kr>
+Date:   Wed May 26 02:33:22 2021 +0900
+
+    with tweet,like,delete using redux
+
+[33mcommit 5b4d4c4a2cadde36e70d1e91163341af38960e82[m
+Author: Yang <justinalone@korea.ac.kr>
+Date:   Wed May 26 00:26:26 2021 +0900
+
+    like tweets and delete tweets
+
+[33mcommit d61437a37c7457ceff3b2d538125d95538beb2d9[m
+Author: Yang <justinalone@korea.ac.kr>
+Date:   Tue May 25 19:37:23 2021 +0900
+
+    adding state to the tweet componenet
+
+[33mcommit 69da316b8274336dc7055124929a57d7aab6ea5f[m[33m ([m[1;32msekelton[m[33m)[m
+Author: Yang <justinalone@korea.ac.kr>
+Date:   Mon May 24 18:19:36 2021 +0900
+
+    mockup branch merged
+
+[33mcommit e3f1d3c2524a891fcf53e1b5136e59e8d5ecc91a[m[33m ([m[1;31morigin/master[m[33m)[m
+Merge: 0637743 414f807
+Author: Yang <79007969+OpTriumph@users.noreply.github.com>
+Date:   Mon May 24 17:50:50 2021 +0900
+
+    Merge pull request #1 from OpTriumph/markup
+    
+    nextjs 추가 & 마크업
+
+[33mcommit 414f8072409025e0db2154d511d1749d2160a135[m
+Author: L-SuMin <84561298+L-SuMin@users.noreply.github.com>
+Date:   Mon May 24 16:35:19 2021 +0900
+
+    Update README.md
+
+[33mcommit 9934f39ac31fc9f83106e3b20502f9c82d670451[m
+Author: username <osthus@korea.ac.kr>
+Date:   Mon May 24 16:25:09 2021 +0900
+
+    nextjs 추가 & 마크업
+
+[33mcommit 0637743a56633036088f4bc05b39695fa878d475[m
+Author: Yang <79007969+OpTriumph@users.noreply.github.com>
+Date:   Sat May 22 03:33:24 2021 +0900
+
+    Add files via upload
+    
+    Presentation PPT
+
+[33mcommit 49a4fb8d1a2d4a342a5a2a13e4f084b5616041d8[m[33m ([m[1;32mmaster[m[33m)[m
+Author: Yang <justinalone@korea.ac.kr>
+Date:   Fri May 21 15:18:52 2021 +0900
+
+    setup
+
+[33mcommit 7943e214cb3d19157e4a4272951868886e07bcff[m
+Author: Yang <justinalone@korea.ac.kr>
+Date:   Fri May 21 15:14:51 2021 +0900
+
+    first commit

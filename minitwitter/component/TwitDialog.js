@@ -17,6 +17,7 @@ export default function TwitDialog({ open, handleClose }) {
   const [text, setText] = useState("");
 
   const dispatch = useDispatch();
+
   const handleChange = (event) => {
     setText(event.target.value);
   };

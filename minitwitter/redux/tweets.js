@@ -5,15 +5,11 @@ import { v4 as uuid } from "uuid";
 const MOCK_DATA = [
   {
     id: "1111",
+    user: { userName: "MockUser", userid: "238151-8dsdf91-412" },
     text: "this is a Mock tweet ",
     like: 11,
     retweet: 21,
-    user: {
-      userid: "tweet1",
-      userName: "MockUser",
-    },
     mention: [],
-
     time: "May 25",
   },
 ];

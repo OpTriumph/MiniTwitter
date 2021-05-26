@@ -13,6 +13,7 @@ import { useSelector } from "react-redux";
 export default function Home() {
   const timestamp = require("time-stamp");
   const tweets = useSelector((state) => state.tweets);
+
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
