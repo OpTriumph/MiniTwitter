@@ -29,7 +29,7 @@ export const tweetsReducer = createReducer(MOCK_DATA, (builder) => {
         retweet: 0,
         mention: [],
         user: "",
-        time: timestamp("YYYY/MM/DD:mm:ss"),
+        time: timestamp("YYYY/MM/DD HH:mm:ss"),
       };
       state.push(tweet);
     })

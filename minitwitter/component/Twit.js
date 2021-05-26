@@ -108,14 +108,18 @@ export default function TwitLine({ tweets = [], likeTweet, deleteTweet }) {
         key={tweets[tweets.length - 1].id}
       />
       <Paper variant="outlined" className={classes.paper}>
-        {tweets.map((tweet) => (
-          <Twit
-            key={tweet.id}
-            tweet={tweet}
-            likeTweet={likeTweet}
-            deleteTweet={deleteTweet}
-          />
-        ))}
+        {/* .slice(0).reverse(). */}
+        {tweets
+          .slice(0)
+          .reverse()
+          .map((tweet) => (
+            <Twit
+              key={tweet.id}
+              tweet={tweet}
+              likeTweet={likeTweet}
+              deleteTweet={deleteTweet}
+            />
+          ))}
       </Paper>
     </Grid>
   );
