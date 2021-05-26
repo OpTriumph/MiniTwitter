@@ -42,13 +42,15 @@ function MyInfo() {
   );
 }
 
-export default function TwitProfile() {
+export default function TwitProfile(tweet) {
+  const { userid, userName, userInfo } = tweet.user || {};
+
   const classes = useStyles();
   return (
     <Grid item xs>
       <Paper variant="outlined" className={classes.paper}>
         <Typography>
-          <b>유저 이름2</b>
+          <b>{userName}</b>
         </Typography>
       </Paper>
 
@@ -65,10 +67,10 @@ export default function TwitProfile() {
           <Grid item container direction="row">
             <Grid item xs>
               <Typography variant="h4">
-                <b>유저 이름2</b>
+                <b>{userName}</b>
               </Typography>
               <Typography variant="h6" style={{ color: "#afafaf" }}>
-                @아이디2
+                @{userid}
               </Typography>
             </Grid>
 
@@ -94,7 +96,7 @@ export default function TwitProfile() {
           </Grid>
 
           <Grid item xs>
-            <Typography variant="body1">미니트위터 자기소개란. Test</Typography>
+            <Typography variant="body1">{userInfo}</Typography>
           </Grid>
 
           <MyInfo />

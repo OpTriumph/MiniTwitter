@@ -10,18 +10,18 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Grid from "@material-ui/core/Grid";
 
-import { addTweet } from "../redux/tweets";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
-export default function TwitDialog({ open, handleClose }) {
-  const [text, setText] = useState("");
+
+export default function ProfileDialog({ open, handleClose }) {
+  const [user, setUser] = useState("");
 
   const dispatch = useDispatch();
   const handleChange = (event) => {
-    setText(event.target.value);
+    setUser(event.target.value);
   };
 
-  const handleTweet = (event) => {
+  const handleUserName = (event) => {
     if (event.type !== "click") {
       return;
     }
@@ -29,7 +29,7 @@ export default function TwitDialog({ open, handleClose }) {
       return;
     }
     handleClose();
-    dispatch(addTweet(text));
+    dispatch(add(text));
     setText("");
   };
 

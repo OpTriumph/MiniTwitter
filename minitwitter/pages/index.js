@@ -1,13 +1,11 @@
 import React from "react";
 import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
 import Container from "@material-ui/core/Container";
 import TwitterIcon from "@material-ui/icons/Twitter";
 
 import { makeStyles } from "@material-ui/core/styles";
 import Image from "next/image";
-import Link from "next/link";
-
+import Login from "../component/Login";
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
@@ -32,38 +30,7 @@ export default function SignInSide() {
         <TwitterIcon fontSize="large" color="primary" />
 
         <form noValidate>
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="ID"
-            label="아이디"
-            name="ID"
-            autoFocus
-          />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="비밀번호"
-            type="password"
-            id="password"
-          />
-          <Button color="primary">회원가입</Button>
-          <Link href="home">
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"
-              className={classes.submit}
-            >
-              로그인
-            </Button>
-          </Link>
+          <Login />
         </form>
         <div className={classes.buttons}>
           <Button>

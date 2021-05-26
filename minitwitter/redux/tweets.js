@@ -5,11 +5,15 @@ import { v4 as uuid } from "uuid";
 const MOCK_DATA = [
   {
     id: "1111",
-    text: "this is ",
-    like: 0,
-    retweet: 0,
+    text: "this is a Mock tweet ",
+    like: 11,
+    retweet: 21,
+    user: {
+      userid: "tweet1",
+      userName: "MockUser",
+    },
     mention: [],
-    user: "React",
+
     time: "May 25",
   },
 ];
@@ -27,8 +31,12 @@ export const tweetsReducer = createReducer(MOCK_DATA, (builder) => {
         text: action.payload,
         like: 0,
         retweet: 0,
+        user: {
+          userid: uuid(),
+          userName: "MockUser",
+          userInfo: "implementing info",
+        },
         mention: [],
-        user: "",
         time: timestamp("YYYY/MM/DD HH:mm:ss"),
       };
       state.push(tweet);

@@ -4,6 +4,7 @@ import Container from "@material-ui/core/Container";
 import TwitDialog from "../component/TwitDialog.js";
 import TwitMenu from "../component/TwitMenu.js";
 import TwitProfile from "../component/TwitProfile";
+import ProfileDialog from "../component/ProfileDialog";
 
 export default function profile() {
   const [open, setOpen] = React.useState(false);
@@ -21,6 +22,7 @@ export default function profile() {
       <Grid container spacing={2}>
         <TwitMenu handleClickOpen={handleClickOpen} />
         <TwitProfile />
+        {/* <ProfileDialog handleClose={handleClose} open={open} /> */}
       </Grid>
 
       <TwitDialog handleClose={handleClose} open={open} />

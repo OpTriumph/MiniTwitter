@@ -46,13 +46,13 @@ function Twit({ tweet }) {
         }
         title={
           <Typhography variant="h6">
-            <b>{user}</b>
+            <b>{user.userName}</b>
           </Typhography>
         }
         subheader={
           <>
             <Typhography variant="body2" component="span">
-              @{user} · {time}
+              @{user.userid} · {time}
             </Typhography>
           </>
         }
@@ -108,7 +108,6 @@ export default function TwitLine({ tweets = [], likeTweet, deleteTweet }) {
         key={tweets[tweets.length - 1].id}
       />
       <Paper variant="outlined" className={classes.paper}>
-        {/* .slice(0).reverse(). */}
         {tweets
           .slice(0)
           .reverse()
