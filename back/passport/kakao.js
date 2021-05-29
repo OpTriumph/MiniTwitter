@@ -14,6 +14,9 @@ module.exports = () => {
           const user = await User.findOne({
             where: {},
           });
+          if (!user) {
+            return done;
+          }
           console.log(profile);
           done(null, profile);
         } catch (error) {
