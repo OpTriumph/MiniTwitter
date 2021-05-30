@@ -5,7 +5,7 @@ import TwitDialog from "../component/TwitDialog.js";
 import TwitMenu from "../component/TwitMenu.js";
 import TwitProfile from "../component/TwitProfile";
 
-export default function profile() {
+export default function Profile() {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
