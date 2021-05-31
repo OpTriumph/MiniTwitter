@@ -2,8 +2,10 @@ module.exports = (sequelize, DataTypes) => {
   const Hashtag = sequelize.define(
     "Hashtag",
     {
-      //id 기본적으로 존재.
-      name: {},
+      name: {
+        type: DataTypes.STRING(20),
+        allowNull: false,
+      },
     },
     {
       charset: "utf8",

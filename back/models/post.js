@@ -2,8 +2,10 @@ module.exports = (sequelize, DataTypes) => {
   const Post = sequelize.define(
     "Post",
     {
-      //id 기본적으로 존재.
-      content: {},
+      content: {
+        type: DataTypes.TEXT,
+        allowNull: false,
+      },
     },
     {
       //mb4 추가시 이모티콘도 추가 가능해진다.

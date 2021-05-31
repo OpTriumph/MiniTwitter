@@ -6,9 +6,17 @@ module.exports = (sequelize, DataTypes) => {
       email: {
         type: DataTypes.STRING(30),
         allowNull: false, // 필수요소
+        unique: true,
       },
-      nickname: {},
-      password: {},
+      nickname: {
+        type: DataTypes.STRING(30),
+        allowNull: false,
+        unique: true,
+      },
+      password: {
+        type: DataTypes.STRING(100),
+        allowNull: false,
+      },
     },
     {
       // 한글 위한 코드

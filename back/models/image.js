@@ -2,8 +2,11 @@ module.exports = (sequelize, DataTypes) => {
   const Image = sequelize.define(
     "Image",
     {
-      //id 기본적으로 존재.
-      src: {},
+      //url이므로 길게 잡음
+      src: {
+        type: DataTypes.STRING(200),
+        allowNull: false,
+      },
     },
     {
       //mb4 추가시 이모티콘도 추가 가능해진다.
