@@ -4,9 +4,9 @@ import { ThemeProvider } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 
 import { Provider } from "react-redux";
-import createStore from "../redux/store";
+import createTweetStore from "../redux/store";
 // Create a theme instance.
-const store = createStore();
+const store = createTweetStore();
 
 const theme = createMuiTheme({
   palette: {
