@@ -1,10 +1,33 @@
 const express = require("express");
-const router = express.Router();
+
 const passport = require("passport");
 
 //const {User, Post} = require('../models');
 //const isLoggedIn, isNotLoggedIn} = require('./middlewares');
+/**
+ * @swagger
+ *  tags:
+ *    name: Users
+ *    description: User management
+ */
 
+const router = express.Router();
+/**
+ * @swagger
+ * path:
+ *  /user:
+ *    get:
+ *      summary: "Select User"
+ *      tags: [Users]
+ *      response:
+ *        "200":
+ *          description: A user schema
+ *          content:
+ *            application/json:
+ *              schema:
+ *                $ref: '#/components/schemas/User'
+ *
+ */
 router.get("/", async (req, res, next) => {
   try {
     if (req.user) {

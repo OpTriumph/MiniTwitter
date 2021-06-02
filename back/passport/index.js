@@ -13,7 +13,7 @@ module.exports = () => {
   //그래서, user.js의 req.user에 이 정보가 들어가있다.
   passport.deserializeUser(async (id, done) => {
     try {
-      const user = await User.findOne({ where: { id } });
+      //const user = await User.findOne({ where: { id } });
       done(null, user);
     } catch (error) {
       console.error(error);

@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const passport = require("passport");
-const KaKaoStrategy = require("passport-kakao").Strategy;
 
 router.get("/", (req, res) => {
   res.send("hi boy");
@@ -12,10 +11,10 @@ router.get("/kakao", passport.authenticate("kakao"));
 router.get(
   "/kakao/callback",
   passport.authenticate("kakao", {
-    failureRedirect: "/",
+    failureRedirect: "localhost:3000/",
   }),
   (req, res) => {
-    res.redirect("/");
+    res.redirect("http://localhost:3000/home");
   }
 );
 

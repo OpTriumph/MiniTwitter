@@ -5,6 +5,8 @@ const userRouter = require("./routes/user");
 const authRouter = require("./routes/auth");
 const passport = require("passport");
 const passportConfig = require("./passport");
+const { swaggerUi, specs } = require("./swagger");
+const cors = require("cors");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -18,9 +20,13 @@ app.use(
 );
 passportConfig();
 
+app.use(cors());
+
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
 app.get("/", (req, res) => {
   res.send("hi");
 });
+
 app.use("/post", postRouter);
 app.use("/user", userRouter);
 app.use("/auth", authRouter);

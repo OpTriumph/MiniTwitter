@@ -11,14 +11,21 @@ module.exports = () => {
       },
       async (accessToken, refreshToken, profile, done) => {
         try {
-          const user = await User.findOne({
-            where: {},
+          /*const user = await User.findOne({
+            where: { snsId: profile.id, provider : 'kakao'},
           });
-          if (!user) {
-            return done;
-          }
-          console.log(profile);
-          done(null, profile);
+          if (user){
+            done(null,exUser);
+          } else {
+            const newUser = await User.create({
+              email:profile._json && profile._json.kakao_account_email,
+              nick: profile.displayName,
+              snsId:profile.id,
+              provider:'kakao',
+            });
+            done(null, newUser)
+          }*/
+          return done(null, profile);
         } catch (error) {
           console.error(error);
           return done(error);
