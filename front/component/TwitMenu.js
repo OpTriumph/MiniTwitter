@@ -5,7 +5,7 @@ import TwitterIcon from "@material-ui/icons/Twitter";
 import React from "react";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
-
+import { useRouter } from "next/router";
 import { makeStyles } from "@material-ui/core/styles";
 
 import Link from "next/link";
@@ -19,6 +19,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 export default function TwitMenu({ handleClickOpen }) {
   const classes = useStyles();
+  const router = useRouter();
   return (
     <Grid item container xs={3} direction="column" spacing={2}>
       <Link href="home">
@@ -31,8 +32,9 @@ export default function TwitMenu({ handleClickOpen }) {
           size="large"
           startIcon={<HomeIcon />}
           className={classes.button}
+          color={router.asPath === "/home" ? "primary" : "default"}
         >
-          홈
+          <b>홈</b>
         </Button>
       </Link>
       <Link href="profile">
@@ -40,8 +42,9 @@ export default function TwitMenu({ handleClickOpen }) {
           size="large"
           startIcon={<PersonIcon />}
           className={classes.button}
+          color={router.asPath === "/profile" ? "primary" : "default"}
         >
-          프로필
+          <b>프로필</b>
         </Button>
       </Link>
       <Button
@@ -52,7 +55,7 @@ export default function TwitMenu({ handleClickOpen }) {
         className={classes.button}
         onClick={handleClickOpen}
       >
-        트윗
+        <b>트윗</b>
       </Button>
     </Grid>
   );
