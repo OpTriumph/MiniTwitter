@@ -7,6 +7,7 @@ import TwitterIcon from "@material-ui/icons/Twitter";
 import { makeStyles } from "@material-ui/core/styles";
 import Image from "next/image";
 import Link from "next/link";
+import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -75,7 +76,11 @@ export default function SignInSide() {
             />
           </Button>
 
-          <Button>
+          <Button
+            onClick={async () =>
+              await axios.get("http://localhost:3065/auth/kakao")
+            }
+          >
             <Image
               src="/kakao_login_medium_narrow.png"
               alt="Kakao Id login"

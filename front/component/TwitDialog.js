@@ -19,7 +19,7 @@ export default function TwitDialog({ open, handleClose }) {
       fullWidth
     >
       <DialogTitle id="close">
-        <IconButton color="primary" aria-label="delete" onClick={handleClose}>
+        <IconButton color="primary" aria-label="close" onClick={handleClose}>
           <ClearIcon />
         </IconButton>
       </DialogTitle>
