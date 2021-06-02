@@ -20,7 +20,7 @@ module.exports = class Hashtag extends Model {
       }
     );
   }
-  static associate(db) {
+  /*static associate(db) {
     db.Hashtag.belongsToMany(db.Post, { through: "PostHashtag" });
-  }
+  }*/
 };

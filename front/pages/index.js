@@ -77,9 +77,11 @@ export default function SignInSide() {
           </Button>
 
           <Button
-            onClick={async () =>
-              await axios.get("http://localhost:3065/auth/kakao")
-            }
+            onClick={async () => {
+              const response = await axios.get(
+                "http://localhost:3065/auth/kakao"
+              );
+            }}
           >
             <Image
               src="/kakao_login_medium_narrow.png"

@@ -1,19 +1,26 @@
-module.exports = (sequelize, DataTypes) => {
-  const Image = sequelize.define(
-    "Image",
-    {
-      //url이므로 길게 잡음
-      src: {
-        type: DataTypes.STRING(200),
-        allowNull: false,
+const DataTypes = require("sequelize");
+const { Model } = DataTypes;
+
+module.exports = class Image extends Model {
+  static init(sequelize) {
+    return super.init(
+      {
+        //url이므로 길이를 여유있게 둔다.
+        src: {
+          type: DataTypes.STRING(200),
+          allowNull: false,
+        },
       },
-    },
-    {
-      //mb4 추가시 이모티콘도 추가 가능해진다.
-      charset: "utf8",
-      collate: "utf8_general_ci",
-    }
-  );
-  Image.associate = (db) => {};
-  return Image;
+      {
+        modelName: "Image",
+        tableName: "images",
+        charset: "utf8",
+        collate: "utf8_general_ci",
+        sequelize,
+      }
+    );
+  }
+  static associate(db) {
+    db.Image.belongsTo(db.Post);
+  }
 };
