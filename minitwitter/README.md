@@ -7,10 +7,10 @@
 - 왼쪽 메뉴의 home, profile을 클릭하면 각각의 페이지로 이동
 - 트윗 버튼을 누르면 다이얼로그 창이 나와 트윗 입력 가능
 - 
-------------Trying to implement simple functions with redux------------
-- Can Post new tweets and will showup in the "newest tweet" section.
-- Can Like the tweets
-- Can Delete the tweets
+------------Trying to implement with redux-saga ------------
+-able to fetch tweets from JSON server
+-may able to post tweets
+
 
 
 ## Setup
