@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
 
 function Twit({ tweet }) {
   const dispatch = useDispatch();
-  const { id, title, userId } = tweet || {};
+  const { id, title, userId, likes } = tweet || {};
   const classes = useStyles();
   return (
     <Card>
@@ -51,7 +51,7 @@ function Twit({ tweet }) {
         }
         title={
           <Typhography variant="h6">
-            <b>justin</b>
+            <b>{userId}</b>
           </Typhography>
         }
         subheader={
@@ -89,7 +89,7 @@ function Twit({ tweet }) {
           <FavoriteBorderIcon />
         </IconButton>
         <Typography component="span" variant="body2">
-          10
+          {likes}
         </Typography>
       </CardActions>
     </Card>
@@ -106,25 +106,18 @@ export default function TwitLine({ tweets = [], likeTweet, deleteTweet }) {
       <Paper variant="outlined" className={classes.paper}>
         <b>최신 트윗</b>
       </Paper>
-      <Twit
-        tweet={tweets[tweets.length - 1]}
-        likeTweet={likeTweet}
-        deleteTweet={deleteTweet}
-        key={tweets[tweets.length - 1].id}
-      />
-      <Paper variant="outlined" className={classes.paper}>
-        {tweets
-          .slice(0)
-          .reverse()
-          .map((tweet) => (
-            <Twit
-              key={tweet.id}
-              tweet={tweet}
-              likeTweet={likeTweet}
-              deleteTweet={deleteTweet}
-            />
-          ))}
-      </Paper>
+      {tweets
+        .slice(0)
+        .reverse()
+        .map((tweet) => (
+          <Twit
+            key={tweet.id}
+            tweet={tweet}
+            likeTweet={likeTweet}
+            deleteTweet={deleteTweet}
+          />
+        ))}
+      <Paper variant="outlined" className={classes.paper}></Paper>
     </Grid>
   );
 }

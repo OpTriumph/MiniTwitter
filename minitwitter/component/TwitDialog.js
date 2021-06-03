@@ -12,6 +12,7 @@ import Grid from "@material-ui/core/Grid";
 
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
+import tweetSlice from "../redux/tweets";
 
 // export default function TwitDialog({ open, handleClose }) {
 //   const [text, setText] = useState("");
@@ -83,9 +84,13 @@ import { useState, useEffect } from "react";
 // }
 
 export default function TwitDialog({ open, handleClose }) {
+  const tweet = useSelector(({ tweetReducer }) => tweetReducer.tweets);
   const [text, setText] = useState("");
 
   const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(tweetSlice.actions.addTweet(text));
+  }, []);
 
   const handleChange = (event) => {
     setText(event.target.value);
@@ -99,7 +104,6 @@ export default function TwitDialog({ open, handleClose }) {
       return;
     }
     handleClose();
-    dispatch(addTweet(text));
     setText("");
   };
 

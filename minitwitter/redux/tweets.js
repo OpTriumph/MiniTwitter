@@ -43,6 +43,32 @@ const tweetSlice = createSlice({
       state.isLoading = false;
       state.error = action.payload;
     },
+    ////////////////////////////////////////////////////////
+
+    addTweet: (state, action) => {
+      state.isLoading = true;
+    },
+    addTweetSuccess: (state, action) => {
+      state.isLoading = false;
+      state.tweets.unshift(action.payload);
+    },
+    addTweetFail: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
+
+    ////////////////////////////////
+    likeTweet: (state, action) => {
+      state.isLoading = true;
+    },
+    likeTweetSuccess: (state, action) => {
+      state.isLoading = false;
+      state.tweet = state.push(tweet);
+    },
+    likeTweetFail: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
   },
 });
 

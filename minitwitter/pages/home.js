@@ -20,11 +20,11 @@ export default function Home() {
 
   //   const timestamp = require("time-stamp");
   //   const tweets = useSelector((state) => state.tweets);
-
   //   const [open, setOpen] = React.useState(false);
 
   useEffect(() => {
     dispatch(tweetSlice.actions.fetchTweets());
+    dispatch(tweetSlice.actions.addTweet());
   }, []);
 
   // const listItems = tweet.map((item) => (
