@@ -4,8 +4,10 @@ import { ThemeProvider } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 
 import { Provider } from "react-redux";
-import store from "../redux/store";
+import createTweetStore from "../redux/store";
 // Create a theme instance.
+const store = createTweetStore();
+
 const theme = createMuiTheme({
   palette: {
     primary: {

@@ -1,13 +1,24 @@
-import { configureStore } from "@reduxjs/toolkit";
+import createSagaMiddleware from "redux-saga";
+import { applyMiddleware, combineReducers, createStore } from "redux";
+import { all } from "redux-saga/effects";
+import tweetSlice from "../redux/tweets";
+import tweetSaga from "../sagas/tweets";
 
-import { tweetsReducer } from "./tweets";
-import { userReducer } from "./user";
+const rootSaga = function* () {
+  yield all([...tweetSaga]);
+};
 
-const store = configureStore({
-  reducer: {
-    tweets: tweetsReducer,
-    User: userReducer,
-  },
-});
+const createTweetStore = () => {
+  const sagaMiddleware = createSagaMiddleware();
 
-export default store;
+  const store = createStore(
+    combineReducers({
+      tweetReducer: tweetSlice.reducer,
+    }),
+    applyMiddleware(sagaMiddleware)
+  );
+  sagaMiddleware.run(rootSaga);
+  return store;
+};
+
+export default createTweetStore;

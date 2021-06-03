@@ -25,12 +25,12 @@ function MyInfo({ follower, following, signUpDate }) {
     <Grid item container direction="row" spacing={4}>
       <Grid item>
         <Typography variant="body1" component="span">
-          <b>{following.length}</b> 팔로잉
+          <b>{following}</b> 팔로잉
         </Typography>
       </Grid>
       <Grid item>
         <Typography variant="body1" component="span">
-          <b>{follower.length}</b> 팔로워
+          <b>{follower}</b> 팔로워
         </Typography>
       </Grid>
       <Grid item>

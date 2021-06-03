@@ -1,48 +1,75 @@
-import { createReducer, createAction } from "@reduxjs/toolkit";
-// import { MOCK_DATA } from "../pages/home";
-import { v4 as uuid } from "uuid";
+import { createSlice } from "@reduxjs/toolkit";
 
-const MOCK_DATA = [
-  {
-    id: "1111",
-    user: { userName: "MockUser", userid: "238151-8dsdf91-412" },
-    text: "this is a Mock tweet ",
-    like: 11,
-    retweet: 21,
-    mention: [],
-    time: "May 25",
+const initialState = {
+  isLoading: false,
+  tweets: [],
+  tweet: {},
+  error: {},
+};
+
+const tweetSlice = createSlice({
+  name: "tweet",
+  initialState,
+  reducers: {
+    fetchTweets: (state, action) => {
+      state.isLoading = true;
+      state.tweets = [];
+      state.tweet = {};
+      state.error = {};
+    },
+
+    fetchTweetsSuccess: (state, action) => {
+      state.isLoading = false;
+      state.tweets = action.payload;
+    },
+
+    fetchTweetsFail: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
+
+    fetchTweet: (state, action) => {
+      state.isLoading = true;
+      state.tweet = {};
+      state.error = {};
+    },
+
+    fetchTweetSuccess: (state, action) => {
+      state.isLoading = false;
+      state.tweet = action.payload;
+    },
+
+    fetchTweetFail: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
+    ////////////////////////////////////////////////////////
+
+    addTweet: (state, action) => {
+      state.isLoading = true;
+    },
+    addTweetSuccess: (state, action) => {
+      state.isLoading = false;
+      state.tweets.unshift(action.payload);
+    },
+    addTweetFail: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
+
+    ////////////////////////////////
+    likeTweet: (state, action) => {
+      state.isLoading = true;
+    },
+    likeTweetSuccess: (state, action) => {
+      state.isLoading = false;
+      state.tweet = state.push(tweet);
+    },
+    likeTweetFail: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
   },
-];
-
-export const addTweet = createAction("tweets/add");
-export const deleteTweet = createAction("tweets/delete");
-export const likeTweet = createAction("tweets/like");
-const timestamp = require("time-stamp");
-
-export const tweetsReducer = createReducer(MOCK_DATA, (builder) => {
-  builder
-    .addCase(addTweet, (state, action) => {
-      const tweet = {
-        id: uuid(),
-        text: action.payload,
-        like: 0,
-        retweet: 0,
-        user: {
-          userid: uuid(),
-          userName: "MockUser",
-          userInfo: "implementing info",
-        },
-        mention: [],
-        time: timestamp("YYYY/MM/DD HH:mm:ss"),
-      };
-      state.push(tweet);
-    })
-    .addCase(likeTweet, (state, action) => {
-      const tweet = state.find((tweet) => tweet.id === action.payload);
-      tweet.like = tweet.like + 1;
-    })
-    .addCase(deleteTweet, (state, action) => {
-      const index = state.findIndex((tweet) => tweet.id === action.payload);
-      state.splice(index, 1);
-    });
 });
+
+export default tweetSlice;
