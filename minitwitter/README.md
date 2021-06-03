@@ -41,6 +41,15 @@
   ```
   yarn add @reduxjs/toolkit redux react-redux
   ```
+- axios
+  ```
+  yarn add axios
+  ```
+- redux-saga
+  ```
+  yarn add redux-saga
+
+  ```
 ## 실행
 
 ```
@@ -68,8 +77,12 @@ yarn dev
 |      +-- profile.js            (프로필 페이지)
 |
 +-- redux
-|      +-- store.js              (Store configuration)
-|      +-- tweets.js             (Reducer)
+|      +-- store.js              (Store configuration with saga middleware implemented)
+|      +-- tweets.js             (tweetSlice by createSlice )
+|      +-- user.js               (user reducer without saga)
++-- sagas
+|      +-- tweets.js             (tweets saga logics)
+|
 |
 +--public                                      (페이지에서 사용할 이미지파일들)
        +-- btnG_완성형.png                     (네이버 로그인 이미지)
@@ -88,4 +101,7 @@ yarn dev
 - redux.js https://redux.js.org/
 - react-redux.js https://react-redux.js.org/
 - react-Toolkit.js https://redux-toolkit.js.org/
+- redux-saga https://redux-saga.js.org/docs/introduction/GettingStarted/
+- axios https://github.com/axios/axios
+- 
 
