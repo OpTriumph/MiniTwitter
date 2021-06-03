@@ -7,10 +7,11 @@
 - 왼쪽 메뉴의 home, profile을 클릭하면 각각의 페이지로 이동
 - 트윗 버튼을 누르면 다이얼로그 창이 나와 트윗 입력 가능
 - 
-------------Trying to implement with redux-saga ------------
--able to fetch tweets from JSON server
--may able to post tweets
-
+------------Trying to implement simple functions with redux------------
+- Can tweet, Like, delete tweets
+- tweet feeds ordered by tweet time
+- login process make sure blanks are filled, then user id changes to the input id
+- Can change profile Username and Bio with a pop up window
 
 
 ## Setup
@@ -35,20 +36,15 @@
   ```
   npm install --save time-stamp
   ```
+- uuid
+  ```
+  npm install --save time-stamp
+  ```
 - react-redux
 - redux
 - reduxjs/toolkit
   ```
   yarn add @reduxjs/toolkit redux react-redux
-  ```
-- axios
-  ```
-  yarn add axios
-  ```
-- redux-saga
-  ```
-  yarn add redux-saga
-
   ```
 ## 실행
 
@@ -68,7 +64,10 @@ yarn dev
 |      +-- TwitDialog.js         (트윗버튼 클릭시 나오는 트윗 작성 다이얼로그)
 |      +-- TwitMenu.js           (home과 profile 페이지 왼쪽의 메뉴들)
 |      +-- TwitProfile.js        (profile 페이지)
-|
+|      +-- ProfileDialog.js      (profile edit pop page)
+|      +-- Login.js              (Login logic)
+|      +-- CommentDIalog.js      (Comment logic, not implmeneted yet)
+
 +-- pages                        (각 웹페이지들을 포함하는 폴더)
 |      +-- _app.js               (title, theme 색상 지정)
 |      +-- _docmument.js         (material-ui link 적용)
@@ -77,12 +76,9 @@ yarn dev
 |      +-- profile.js            (프로필 페이지)
 |
 +-- redux
-|      +-- store.js              (Store configuration with saga middleware implemented)
-|      +-- tweets.js             (tweetSlice by createSlice )
-|      +-- user.js               (user reducer without saga)
-+-- sagas
-|      +-- tweets.js             (tweets saga logics)
-|
+|      +-- store.js              (Store configuration)
+|      +-- tweets.js             (Tweets Reducer)
+|      +-- user.js               (User Reducer)
 |
 +--public                                      (페이지에서 사용할 이미지파일들)
        +-- btnG_완성형.png                     (네이버 로그인 이미지)
@@ -101,7 +97,4 @@ yarn dev
 - redux.js https://redux.js.org/
 - react-redux.js https://react-redux.js.org/
 - react-Toolkit.js https://redux-toolkit.js.org/
-- redux-saga https://redux-saga.js.org/docs/introduction/GettingStarted/
-- axios https://github.com/axios/axios
-- 
 
