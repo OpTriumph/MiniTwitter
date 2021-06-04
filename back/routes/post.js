@@ -38,6 +38,19 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.delete("/", (req, res) => {});
+router.delete("/:postId", (req, res) => {
+  try {
+    await Post.destroy({
+      where: {
+        id: req.params.postId,
+        UserId: req.user.id,
+      },
+    });
+    res.status(200).json({ PostId: parseInt(req.params.postId, 10) });
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+});
 
 module.exports = router;
