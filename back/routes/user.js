@@ -3,7 +3,6 @@ const bcrypt = require("bcrypt");
 const passport = require("passport");
 
 //const {User, Post} = require('../models');
-//const isLoggedIn, isNotLoggedIn} = require('./middlewares');
 /**
  * @swagger
  *  tags:
