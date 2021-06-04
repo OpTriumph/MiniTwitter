@@ -1,5 +1,5 @@
 const express = require("express");
-
+const bcrypt = require("bcrypt");
 const passport = require("passport");
 
 //const {User, Post} = require('../models');
@@ -37,6 +37,23 @@ router.get("/", async (req, res, next) => {
     console.error(error);
     next(error);
   }
+});
+
+router.post("/", async (req, res, next) => {
+  try {
+    if (req.user) {
+      // from passport.deserialize()
+    }
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+});
+
+router.post("/logout", (req, res, next) => {
+  req.logout();
+  req.session.destroy();
+  req.send("ok");
 });
 
 module.exports = router;
