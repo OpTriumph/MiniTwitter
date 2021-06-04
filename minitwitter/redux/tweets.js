@@ -5,6 +5,12 @@ const initialState = {
   tweets: [],
   tweet: {},
   error: {},
+  likeTweetLoading: false,
+  likeTweetDone: false,
+  likeTweetError: null,
+  addTweetLoading: false,
+  addTweetDone: false,
+  addTweetError: null,
 };
 
 const tweetSlice = createSlice({
@@ -28,46 +34,49 @@ const tweetSlice = createSlice({
       state.error = action.payload;
     },
 
-    fetchTweet: (state, action) => {
-      state.isLoading = true;
-      state.tweet = {};
-      state.error = {};
-    },
+    // fetchTweet: (state, action) => {
+    //   state.isLoading = true;
+    //   state.tweet = {};
+    //   state.error = {};
+    // },
 
-    fetchTweetSuccess: (state, action) => {
-      state.isLoading = false;
-      state.tweet = action.payload;
-    },
+    // fetchTweetSuccess: (state, action) => {
+    //   state.isLoading = false;
+    //   state.tweet = action.payload;
+    // },
 
-    fetchTweetFail: (state, action) => {
-      state.isLoading = false;
-      state.error = action.payload;
-    },
+    // fetchTweetFail: (state, action) => {
+    //   state.isLoading = false;
+    //   state.error = action.payload;
+    // },
     ////////////////////////////////////////////////////////
 
     addTweet: (state, action) => {
-      state.isLoading = true;
+      state.addTweetLoading = true;
     },
     addTweetSuccess: (state, action) => {
-      state.isLoading = false;
+      state.addTweetLoading = false;
+      state.addTweetDone = true;
       state.tweets.unshift(action.payload);
     },
     addTweetFail: (state, action) => {
-      state.isLoading = false;
-      state.error = action.payload;
+      state.addTweetLoading = false;
+      state.addTweetError = action.payload;
     },
 
     ////////////////////////////////
     likeTweet: (state, action) => {
-      state.isLoading = true;
+      state.likeTweetLoading = true;
     },
     likeTweetSuccess: (state, action) => {
-      state.isLoading = false;
-      state.tweet = state.push(tweet);
+      let theOne = state.tweets.find((found) => found.id === action.payload.id);
+      state.likeTweetLoading = false;
+      state.likeTweetDone = true;
+      state.tweet.likes += 1;
     },
     likeTweetFail: (state, action) => {
-      state.isLoading = false;
-      state.error = action.payload;
+      state.likeTweetLoading = false;
+      state.likeTweetError = action.payload;
     },
   },
 });
