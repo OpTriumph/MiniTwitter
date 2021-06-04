@@ -7,7 +7,6 @@ import TwitterIcon from "@material-ui/icons/Twitter";
 import { makeStyles } from "@material-ui/core/styles";
 import Image from "next/image";
 import Link from "next/link";
-import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -67,29 +66,26 @@ export default function SignInSide() {
           </Link>
         </form>
         <div className={classes.buttons}>
-          <Button>
-            <Image
-              src="/btnG_완성형.png"
-              alt="Naver Id login"
-              width={180}
-              height={40}
-            />
-          </Button>
-
-          <Button
-            onClick={async () => {
-              const response = await axios.get(
-                "http://localhost:3065/auth/kakao"
-              );
-            }}
-          >
-            <Image
-              src="/kakao_login_medium_narrow.png"
-              alt="Kakao Id login"
-              width={180}
-              height={40}
-            />
-          </Button>
+          <Link href="http://localhost:3065/auth/naver">
+            <Button disableRipple size="small">
+              <Image
+                src="/btnG_완성형.png"
+                alt="Naver Id login"
+                width={180}
+                height={40}
+              />
+            </Button>
+          </Link>
+          <Link href="http://localhost:3065/auth/kakao">
+            <Button disableRipple size="small">
+              <Image
+                src="/kakao_login_medium_narrow.png"
+                alt="Kakao Id login"
+                width={180}
+                height={40}
+              />
+            </Button>
+          </Link>
         </div>
       </div>
     </Container>
