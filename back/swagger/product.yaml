@@ -13,5 +13,5 @@ components:
           format: email
           description: Email for the user, needs to be unique.
       example:
-        name: joohee
-        email: joohee@email.com
+        name: jjeongryu
+        email: totw2020@korea.ac.kr
