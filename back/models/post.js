@@ -1,18 +1,32 @@
-module.exports = (sequelize, DataTypes) => {
-  const Post = sequelize.define(
-    "Post",
-    {
-      content: {
-        type: DataTypes.TEXT,
-        allowNull: false,
+const DataTypes = require("sequelize");
+const { Model } = DataTypes;
+
+module.exports = class Post extends Model {
+  static init(sequelize) {
+    return super.init(
+      {
+        // id가 기본적으로 들어있다.
+        content: {
+          type: DataTypes.TEXT,
+          allowNull: false,
+        },
+        // RetweetId
       },
-    },
-    {
-      //mb4 추가시 이모티콘도 추가 가능해진다.
-      charset: "utf8mb4",
-      collate: "utf8mb4_general_ci",
-    }
-  );
-  Post.associate = (db) => {};
-  return Post;
+      {
+        modelName: "Post",
+        tableName: "posts",
+        charset: "utf8mb4",
+        collate: "utf8mb4_general_ci", // 이모티콘 저장
+        sequelize,
+      }
+    );
+  }
+  static associate(db) {
+    db.Post.hasMany(db.Comment); // post.addComments, post.getComments
+    db.Post.hasMany(db.Image); // post.addImages, post.getImages
+    db.Post.belongsToMany(db.Hashtag, { through: "PostHashtag" }); // post.addHashtags
+    db.Post.belongsToMany(db.User, { through: "Like", as: "Likers" }); // post.addLikers, post.removeLikers
+    db.Post.belongsTo(db.User); // post.addUser, post.getUser, post.setUser
+    db.Post.belongsTo(db.Post, { as: "Retweet" }); // post.addRetweet
+  }
 };
