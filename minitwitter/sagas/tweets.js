@@ -71,12 +71,27 @@ const handlelikeTweet = function* (action) {
     console.log("post liked");
     const response = yield call(() =>
       axios.post(
-        `https://my-json-server.typicode.com/OpTriumph/demo/posts/${data.id}/likes`
+        `https://my-json-server.typicode.com/OpTriumph/demo/posts/${data}/likes`
       )
     );
     yield put(tweetSlice.actions.likeTweetSuccess(response.data));
   } catch (error) {
     yield put(tweetSlice.actions.likeTweetFail(error));
+  }
+};
+
+const handleunlikeTweet = function* (action) {
+  try {
+    const data = action.payload;
+    console.log("post unliked");
+    const response = yield call(() =>
+      axios.delete(
+        `https://my-json-server.typicode.com/OpTriumph/demo/posts/${data}/likes`
+      )
+    );
+    yield put(tweetSlice.actions.unlikeTweetSuccess(response.data));
+  } catch (error) {
+    yield put(tweetSlice.actions.unlikeTweetFail(error));
   }
 };
 
@@ -86,5 +101,6 @@ const tweetSaga = [
   // takeLatest(tweetSlice.actions.fetchTweetSuccess, handlefetchTweetSuccess),
   takeLatest(tweetSlice.actions.addTweet, handleaddTweet),
   takeLatest(tweetSlice.actions.likeTweet, handlelikeTweet),
+  takeLatest(tweetSlice.actions.unlikeTweet, handleunlikeTweet),
 ];
 export default tweetSaga;

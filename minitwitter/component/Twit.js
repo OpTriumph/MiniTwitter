@@ -33,6 +33,8 @@ function Twit({ tweet }) {
   const dispatch = useDispatch();
   const { id, title, userId, likes } = tweet || {};
   const classes = useStyles();
+  // const liked = tweets.likers.find((v) => v.id === id);
+
   return (
     <Card>
       <CardHeader
@@ -73,18 +75,25 @@ function Twit({ tweet }) {
         <Typography component="span" variant="body2">
           10
         </Typography>
-
         <IconButton aria-label="retweet" component="span">
           <RepeatIcon />
         </IconButton>
         <Typography component="span" variant="body2">
           1
         </Typography>
-
+        liked?
         <IconButton
           aria-label="like"
           component="span"
           onClick={() => dispatch(tweetSlice.actions.likeTweet(id))}
+        >
+          <FavoriteBorderIcon />
+        </IconButton>
+        :
+        <IconButton
+          aria-label="like"
+          component="span"
+          onClick={() => dispatch(tweetSlice.actions.unlikeTweet(id))}
         >
           <FavoriteBorderIcon />
         </IconButton>
@@ -96,7 +105,12 @@ function Twit({ tweet }) {
   );
 }
 
-export default function TwitLine({ tweets = [], likeTweet, deleteTweet }) {
+export default function TwitLine({
+  tweets = [],
+  likeTweet,
+  unlikeTweet,
+  deleteTweet,
+}) {
   // const [like, setLike] = React.useState(0);
   if (tweets.length < 1) return null;
 
