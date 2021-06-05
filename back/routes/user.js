@@ -3,7 +3,6 @@ const bcrypt = require("bcrypt");
 const passport = require("passport");
 const { User, Post } = require("../models");
 
-//const {User, Post} = require('../models');
 /**
  * @swagger
  *  tags:
@@ -31,6 +30,7 @@ const router = express.Router();
 router.get("/", async (req, res, next) => {
   try {
     if (req.user) {
+      // deserializeUser 호출 되면서 req.user에 로그인 된 사용자 정보가 들어간다.
       const userInfo = await User.findOne({
         where: { id: req.user.id },
         attributes: {
@@ -71,7 +71,7 @@ router.get("/", async (req, res, next) => {
  *      tags: [Users]
  *      response:
  *        "200":
- *          description: A user schema
+ *          description: Sign-up
  *          content:
  *            application/json:
  *              schema:
@@ -98,11 +98,27 @@ router.post("/", async (req, res, next) => {
     next(error);
   }
 });
+/**
+ * @swagger
+ * path:
+ *  /user:
+ *    post:
+ *      summary: "Logout"
+ *      tags: [Users]
+ *      response:
+ *        "200":
+ *          description: logout
+ *          content:
+ *            application/json:
+ *              schema:
+ *                $ref: '#/components/schemas/User'
+ *
+ */
 
 router.post("/logout", (req, res, next) => {
   req.logout();
   req.session.destroy();
-  req.send("ok");
+  req.status(200).send("ok");
 });
 
 module.exports = router;

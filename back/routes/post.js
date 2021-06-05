@@ -1,5 +1,5 @@
 const express = require("express");
-const { Post, User } = require("../models");
+const { Post, User, Comment } = require("../models");
 
 const router = express.Router();
 
@@ -38,12 +38,11 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.delete("/:postId", (req, res) => {
+router.delete("/:postId", async (req, res) => {
   try {
     await Post.destroy({
       where: {
         id: req.params.postId,
-        UserId: req.user.id,
       },
     });
     res.status(200).json({ PostId: parseInt(req.params.postId, 10) });

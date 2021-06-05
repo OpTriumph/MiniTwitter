@@ -1,5 +1,4 @@
 const express = require("express");
-const app = express();
 const cors = require("cors");
 const postRouter = require("./routes/post");
 const userRouter = require("./routes/user");
@@ -10,13 +9,25 @@ const { swaggerUi, specs } = require("./swagger");
 const session = require("express-session");
 const cookieParser = require("cookie-parser");
 
+const { sequelize } = require("./models");
+
+const app = express();
+
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+sequelize
+  .sync({ force: false }) // true시 서버 재실행마다 테이블 재생성
+  .then(() => {
+    console.log("success connection DB");
+  })
+  .catch(console.error);
+
 app.use(cookieParser());
 app.use(
   session({
+    secret: "hi",
     saveUninitialized: false,
     resave: false,
   })
