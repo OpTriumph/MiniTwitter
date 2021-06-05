@@ -1,16 +1,23 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  isLoading: false,
   tweets: [],
   tweet: {},
-  error: {},
+  tweetLoading: false,
+  tweetLoadingDone: false,
+  tweetLoadingError: null,
   likeTweetLoading: false,
   likeTweetDone: false,
   likeTweetError: null,
+  unlikeTweetLoading: false,
+  unlikeTweetDone: false,
+  unlikeTweetError: null,
   addTweetLoading: false,
   addTweetDone: false,
   addTweetError: null,
+  deleteTweetLoading: false,
+  deleteTweetDone: false,
+  deleteTweetError: null,
 };
 
 const tweetSlice = createSlice({
@@ -18,20 +25,17 @@ const tweetSlice = createSlice({
   initialState,
   reducers: {
     fetchTweets: (state, action) => {
-      state.isLoading = true;
-      state.tweets = [];
-      state.tweet = {};
-      state.error = {};
+      state.tweetLoading = true;
     },
 
     fetchTweetsSuccess: (state, action) => {
-      state.isLoading = false;
+      state.tweetLoading = false;
       state.tweets = action.payload;
     },
 
     fetchTweetsFail: (state, action) => {
-      state.isLoading = false;
-      state.error = action.payload;
+      state.tweetLoading = false;
+      state.tweetLoadingError = action.payload;
     },
 
     // fetchTweet: (state, action) => {
@@ -63,7 +67,19 @@ const tweetSlice = createSlice({
       state.addTweetLoading = false;
       state.addTweetError = action.payload;
     },
-
+    ////////////////////////////////
+    deleteTweet: (state, action) => {
+      state.deleteTweetLoading = true;
+    },
+    deleteTweetSuccess: (state, action) => {
+      state.deleteTweetLoading = false;
+      state.deleteTweetDone = true;
+      state.tweets = state.tweets.filter((v) => v.id !== action.payload.id);
+    },
+    deleteTweetFail: (state, action) => {
+      state.deleteTweetLoading = false;
+      state.deleteTweetError = action.payload;
+    },
     ////////////////////////////////
     likeTweet: (state, action) => {
       state.likeTweetLoading = true;
@@ -72,11 +88,25 @@ const tweetSlice = createSlice({
       let theOne = state.tweets.find((found) => found.id === action.payload.id);
       state.likeTweetLoading = false;
       state.likeTweetDone = true;
-      state.tweet.likes += 1;
+      theOne.tweet.likes += 1;
     },
     likeTweetFail: (state, action) => {
       state.likeTweetLoading = false;
       state.likeTweetError = action.payload;
+    },
+    ///////////////////////////////
+    unlikeTweet: (state, action) => {
+      state.unlikeTweetLoading = true;
+    },
+    unlikeTweetSuccess: (state, action) => {
+      let theOne = state.tweets.find((found) => found.id === action.payload.id);
+      state.unlikeTweetLoading = false;
+      state.unlikeTweetDone = true;
+      theOne.tweet.likes -= 1;
+    },
+    unlikeTweetFail: (state, action) => {
+      state.unlikeTweetLoading = false;
+      state.unlikeTweetError = action.payload;
     },
   },
 });

@@ -24,7 +24,6 @@ export default function Home() {
 
   useEffect(() => {
     dispatch(tweetSlice.actions.fetchTweets());
-    dispatch(tweetSlice.actions.addTweet());
   }, []);
 
   // const listItems = tweet.map((item) => (

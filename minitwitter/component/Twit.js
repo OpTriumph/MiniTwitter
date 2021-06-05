@@ -16,7 +16,7 @@ import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
 
 import { useDispatch, useSelector } from "react-redux";
-import { likeTweet, deleteTweet } from "../redux/tweets";
+import tweetSlice from "../redux/tweets";
 
 import { useEffect } from "react";
 import { tweetsAction, tweetSelector } from "../redux/tweets";
@@ -44,7 +44,7 @@ function Twit({ tweet }) {
         action={
           <IconButton
             aria-label="delete"
-            onClick={() => dispatch(deleteTweet(id))}
+            onClick={() => dispatch(tweetSlice.actions.deleteTweet(id))}
           >
             <ClearIcon />
           </IconButton>
@@ -84,7 +84,7 @@ function Twit({ tweet }) {
         <IconButton
           aria-label="like"
           component="span"
-          onClick={() => dispatch(likeTweet(id))}
+          onClick={() => dispatch(tweetSlice.actions.likeTweet(id))}
         >
           <FavoriteBorderIcon />
         </IconButton>

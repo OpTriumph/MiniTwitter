@@ -153,6 +153,7 @@ export default function TwitDialog({ open, handleClose }) {
           variant="contained"
           size="large"
           onClick={handleTweet}
+          loading={addTweetLoading}
         >
           트윗
         </Button>
