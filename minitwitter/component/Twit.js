@@ -75,12 +75,14 @@ function Twit({ tweet }) {
         <Typography component="span" variant="body2">
           10
         </Typography>
-        <IconButton aria-label="retweet" component="span">
+        <IconButton
+          aria-label="retweet"
+          component="span"
+          onClick={() => dispatch(tweetSlice.actions.retweetTweet(id))}
+        >
           <RepeatIcon />
         </IconButton>
-        <Typography component="span" variant="body2">
-          1
-        </Typography>
+        <Typography component="span" variant="body2"></Typography>
         {liked ? (
           <IconButton
             aria-label="like"

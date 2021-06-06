@@ -112,6 +112,21 @@ const handleaddComment = function* (action) {
   }
 };
 
+const handleRetweet = function* (action) {
+  try {
+    const data = action.payload;
+    console.log("retweet", data);
+    const response = yield call(() =>
+      axios.post(
+        `https://my-json-server.typicode.com/OpTriumph/demo/posts/${data}/retweet`
+      )
+    );
+    yield put(tweetSlice.actions.retweetTweetSuccess(response.data));
+  } catch (error) {
+    yield put(tweetSlice.actions.retweetTweetFail(error));
+  }
+};
+
 const tweetSaga = [
   takeLatest(tweetSlice.actions.fetchTweets, handlefetchTweets),
   takeLatest(tweetSlice.actions.deleteTweetSuccess, handledeleteTweet),
@@ -120,5 +135,6 @@ const tweetSaga = [
   takeLatest(tweetSlice.actions.likeTweet, handlelikeTweet),
   takeLatest(tweetSlice.actions.unlikeTweet, handleunlikeTweet),
   takeLatest(tweetSlice.actions.addComment, handleaddComment),
+  takeLatest(tweetSlice.actions.retweetTweet, handleRetweet),
 ];
 export default tweetSaga;

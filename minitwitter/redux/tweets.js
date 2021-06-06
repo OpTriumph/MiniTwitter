@@ -21,6 +21,9 @@ const initialState = {
   tweetCommenting: false,
   tweetCommentDone: false,
   tweetCommentError: null,
+  retweetLoading: false,
+  retweetDone: false,
+  retweetError: null,
 };
 
 const tweetSlice = createSlice({
@@ -111,6 +114,7 @@ const tweetSlice = createSlice({
       state.unlikeTweetLoading = false;
       state.unlikeTweetError = action.payload;
     },
+    /////////////////////////////////////////
     addComment: (state, action) => {
       state.tweetCommenting = true;
     },
@@ -123,6 +127,19 @@ const tweetSlice = createSlice({
     addCommentFail: (state, action) => {
       state.tweetCommenting = false;
       state.tweetCommentError = action.payload;
+    },
+    //////////////////////////////////////
+    retweetTweet: (state, action) => {
+      state.retweetLoading = true;
+    },
+    retweetTweetSuccess: (state, action) => {
+      state.retweetLoading = false;
+      state.retweetDone = true;
+      state.tweets.unshift(action.payload);
+    },
+    retweetTweetFail: (state, action) => {
+      state.retweetLoading = false;
+      state.retweetError = action.payload;
     },
   },
 });
