@@ -18,6 +18,9 @@ const initialState = {
   deleteTweetLoading: false,
   deleteTweetDone: false,
   deleteTweetError: null,
+  tweetCommenting: false,
+  tweetCommentDone: false,
+  tweetCommentError: null,
 };
 
 const tweetSlice = createSlice({
@@ -107,6 +110,19 @@ const tweetSlice = createSlice({
     unlikeTweetFail: (state, action) => {
       state.unlikeTweetLoading = false;
       state.unlikeTweetError = action.payload;
+    },
+    addComment: (state, action) => {
+      state.tweetCommenting = true;
+    },
+    addCommentSuccess: (state, action) => {
+      let theOne = state.tweets.find((found) => found.id === action.payload.id);
+      state.tweetCommenting = false;
+      state.tweetCommentDone = true;
+      theOne.comments.unshift(action.payload);
+    },
+    addCommentFail: (state, action) => {
+      state.tweetCommenting = false;
+      state.tweetCommentError = action.payload;
     },
   },
 });

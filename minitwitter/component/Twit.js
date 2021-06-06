@@ -34,7 +34,7 @@ function Twit({ tweet }) {
   const { id, title, userId, likes } = tweet || {};
   const classes = useStyles();
   // const liked = tweets.likers.find((v) => v.id === id);
-
+  const liked = 1;
   return (
     <Card>
       <CardHeader
@@ -81,22 +81,24 @@ function Twit({ tweet }) {
         <Typography component="span" variant="body2">
           1
         </Typography>
-        liked?
-        <IconButton
-          aria-label="like"
-          component="span"
-          onClick={() => dispatch(tweetSlice.actions.likeTweet(id))}
-        >
-          <FavoriteBorderIcon />
-        </IconButton>
-        :
-        <IconButton
-          aria-label="like"
-          component="span"
-          onClick={() => dispatch(tweetSlice.actions.unlikeTweet(id))}
-        >
-          <FavoriteBorderIcon />
-        </IconButton>
+        {liked ? (
+          <IconButton
+            aria-label="like"
+            component="span"
+            onClick={() => dispatch(tweetSlice.actions.likeTweet(id))}
+          >
+            <FavoriteBorderIcon />
+          </IconButton>
+        ) : (
+          <IconButton
+            aria-label="like"
+            component="span"
+            onClick={() => dispatch(tweetSlice.actions.unlikeTweet(id))}
+          >
+            <FavoriteBorderIcon />
+          </IconButton>
+        )}
+
         <Typography component="span" variant="body2">
           {likes}
         </Typography>

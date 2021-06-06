@@ -57,7 +57,7 @@ const handledeleteTweet = function* (action) {
         axios.delete(
           `https://my-json-server.typicode.com/OpTriumph/demo/posts/${data}`
         )
-      // axios.post(`localhost:3065/post/${data}`)
+      // axios.post(`localhost:3065/post/${data.id}`)
     );
     yield put(tweetSlice.actions.deleteTweetSuccess(response.data));
   } catch (error) {
@@ -95,6 +95,23 @@ const handleunlikeTweet = function* (action) {
   }
 };
 
+const handleaddComment = function* (action) {
+  try {
+    const data = action.payload;
+    console.log("addin comment", data);
+    const response = yield call(
+      () =>
+        axios.post(
+          `https://my-json-server.typicode.com/OpTriumph/demo/posts/${data.id}/comment`
+        )
+      // axios.post(`localhost:3065/post/${data.id}/comment`)
+    );
+    yield put(tweetSlice.actions.addCommentSuccess(response.data));
+  } catch (error) {
+    yield put(tweetSlice.actions.addCommentFail(error));
+  }
+};
+
 const tweetSaga = [
   takeLatest(tweetSlice.actions.fetchTweets, handlefetchTweets),
   takeLatest(tweetSlice.actions.deleteTweetSuccess, handledeleteTweet),
@@ -102,5 +119,6 @@ const tweetSaga = [
   takeLatest(tweetSlice.actions.addTweet, handleaddTweet),
   takeLatest(tweetSlice.actions.likeTweet, handlelikeTweet),
   takeLatest(tweetSlice.actions.unlikeTweet, handleunlikeTweet),
+  takeLatest(tweetSlice.actions.addComment, handleaddComment),
 ];
 export default tweetSaga;
