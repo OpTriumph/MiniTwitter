@@ -13,6 +13,19 @@ const handlefetchTweets = function* () {
   }
 };
 
+const handlefetchUserTweets = function* () {
+  try {
+    const response = yield call(() =>
+      axios.get(
+        `https://my-json-server.typicode.com/OpTriumph/demo/user/${data}/posts`
+      )
+    );
+    yield put(tweetSlice.actions.fetchUserTweetsSuccess(response.data));
+  } catch (error) {
+    yield put(tweetSlice.actions.fetchUserTweetsFail(error));
+  }
+};
+
 // const handlefetchTweetsSuccess = function* (action) {
 //   const data = action.payload;
 //   const id = data[0].id;

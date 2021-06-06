@@ -36,10 +36,24 @@ const tweetSlice = createSlice({
 
     fetchTweetsSuccess: (state, action) => {
       state.tweetLoading = false;
-      state.tweets = action.payload;
+      state.tweets = state.tweets.concat(action.payload);
     },
 
     fetchTweetsFail: (state, action) => {
+      state.tweetLoading = false;
+      state.tweetLoadingError = action.payload;
+    },
+    //////////////////////////////////////////
+    fetchUserTweets: (state, action) => {
+      state.tweetLoading = true;
+    },
+
+    fetchUserTweetsSuccess: (state, action) => {
+      state.tweetLoading = false;
+      state.tweets = state.tweets.concat(action.payload);
+    },
+
+    fetchUserTweetsFail: (state, action) => {
       state.tweetLoading = false;
       state.tweetLoadingError = action.payload;
     },
