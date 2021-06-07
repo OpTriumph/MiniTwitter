@@ -3,6 +3,7 @@ import { applyMiddleware, combineReducers, createStore } from "redux";
 import { all } from "redux-saga/effects";
 import tweetSlice from "../redux/tweets";
 import tweetSaga from "../sagas/tweets";
+import { composeWithDevTools } from "redux-devtools-extension";
 
 const rootSaga = function* () {
   yield all([...tweetSaga]);
@@ -15,7 +16,7 @@ const createTweetStore = () => {
     combineReducers({
       tweetReducer: tweetSlice.reducer,
     }),
-    applyMiddleware(sagaMiddleware)
+    composeWithDevTools(applyMiddleware(sagaMiddleware))
   );
   sagaMiddleware.run(rootSaga);
   return store;

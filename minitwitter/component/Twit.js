@@ -16,7 +16,7 @@ import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
 
 import { useDispatch, useSelector } from "react-redux";
-import { likeTweet, deleteTweet } from "../redux/tweets";
+import tweetSlice from "../redux/tweets";
 
 import { useEffect } from "react";
 import { tweetsAction, tweetSelector } from "../redux/tweets";
@@ -33,6 +33,8 @@ function Twit({ tweet }) {
   const dispatch = useDispatch();
   const { id, title, userId, likes } = tweet || {};
   const classes = useStyles();
+  // const liked = tweets.likers.find((v) => v.id === id);
+  const liked = 1;
   return (
     <Card>
       <CardHeader
@@ -44,7 +46,7 @@ function Twit({ tweet }) {
         action={
           <IconButton
             aria-label="delete"
-            onClick={() => dispatch(deleteTweet(id))}
+            onClick={() => dispatch(tweetSlice.actions.deleteTweet(id))}
           >
             <ClearIcon />
           </IconButton>
@@ -73,21 +75,32 @@ function Twit({ tweet }) {
         <Typography component="span" variant="body2">
           10
         </Typography>
-
-        <IconButton aria-label="retweet" component="span">
+        <IconButton
+          aria-label="retweet"
+          component="span"
+          onClick={() => dispatch(tweetSlice.actions.retweetTweet(id))}
+        >
           <RepeatIcon />
         </IconButton>
-        <Typography component="span" variant="body2">
-          1
-        </Typography>
+        <Typography component="span" variant="body2"></Typography>
+        {liked ? (
+          <IconButton
+            aria-label="like"
+            component="span"
+            onClick={() => dispatch(tweetSlice.actions.likeTweet(id))}
+          >
+            <FavoriteBorderIcon />
+          </IconButton>
+        ) : (
+          <IconButton
+            aria-label="like"
+            component="span"
+            onClick={() => dispatch(tweetSlice.actions.unlikeTweet(id))}
+          >
+            <FavoriteBorderIcon />
+          </IconButton>
+        )}
 
-        <IconButton
-          aria-label="like"
-          component="span"
-          onClick={() => dispatch(likeTweet(id))}
-        >
-          <FavoriteBorderIcon />
-        </IconButton>
         <Typography component="span" variant="body2">
           {likes}
         </Typography>
@@ -96,7 +109,12 @@ function Twit({ tweet }) {
   );
 }
 
-export default function TwitLine({ tweets = [], likeTweet, deleteTweet }) {
+export default function TwitLine({
+  tweets = [],
+  likeTweet,
+  unlikeTweet,
+  deleteTweet,
+}) {
   // const [like, setLike] = React.useState(0);
   if (tweets.length < 1) return null;
 

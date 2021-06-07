@@ -84,13 +84,18 @@ import tweetSlice from "../redux/tweets";
 // }
 
 export default function TwitDialog({ open, handleClose }) {
-  const tweet = useSelector(({ tweetReducer }) => tweetReducer.tweets);
+  // const tweet = useSelector(({ tweetReducer }) => tweetReducer.tweets);
+  const { addTweetLoading, addTweetDone } = useSelector(
+    ({ tweetReducer }) => tweetReducer.tweets
+  );
   const [text, setText] = useState("");
-
   const dispatch = useDispatch();
+
   useEffect(() => {
-    dispatch(tweetSlice.actions.addTweet(text));
-  }, []);
+    if (addTweetDone) {
+      setText("");
+    }
+  }, [addTweetDone]);
 
   const handleChange = (event) => {
     setText(event.target.value);
@@ -103,6 +108,7 @@ export default function TwitDialog({ open, handleClose }) {
     if (text === "") {
       return;
     }
+    dispatch(tweetSlice.actions.addTweet({ text }));
     handleClose();
     setText("");
   };
@@ -147,6 +153,7 @@ export default function TwitDialog({ open, handleClose }) {
           variant="contained"
           size="large"
           onClick={handleTweet}
+          loading={addTweetLoading}
         >
           트윗
         </Button>
