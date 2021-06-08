@@ -3,7 +3,8 @@ const kakao = require("./kakao");
 const naver = require("./naver");
 const local = require("./local");
 module.exports = () => {
-  //로그인 성공 시 user 정보 전달 받아 session에 저장을 하는 함수
+  //로그인 성공 시 req.login 함수 호출되면서 이 함수가 호출된다.
+  //user 정보 전달 받아 session에 저장을 하는 함수
   //session이 있어야 페이지가 이동해도 로그인 정보가 유지된다.
   passport.serializeUser((user, done) => {
     done(null, user.id); //서버에러, 성공
