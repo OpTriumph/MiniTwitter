@@ -116,8 +116,8 @@ router.post("/", async (req, res, next) => {
  */
 
 router.post("/logout", (req, res, next) => {
-  req.logout();
-  req.session.destroy();
+  req.logout(); // req.user 객체 제거
+  req.session.destroy(); // req.session 내용 제거
   req.status(200).send("ok");
 });
 
