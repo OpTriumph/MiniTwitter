@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const passport = require("passport");
-const { User } = require("../models");
+const { User, Post } = require("../models");
 router.post("/login", (req, res, next) => {
   //미들웨어 중첩
   passport.authenticate("local", (err, user, info) => {

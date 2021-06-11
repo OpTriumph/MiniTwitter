@@ -13,14 +13,15 @@ const { sequelize } = require("./models");
 
 const app = express();
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 app.use(
   cors({
     origin: "http://localhost:3000",
     credentials: true,
   })
 );
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 
 sequelize
   .sync({ force: false }) // true시 서버 재실행마다 테이블 재생성
@@ -45,8 +46,6 @@ app.use(
   })
 );
 passportConfig();
-
-app.use(cors());
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
 app.get("/", (req, res) => {

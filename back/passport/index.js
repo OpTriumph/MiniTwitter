@@ -2,6 +2,7 @@ const passport = require("passport");
 const kakao = require("./kakao");
 const naver = require("./naver");
 const local = require("./local");
+const { User } = require("../models");
 module.exports = () => {
   //로그인 성공 시 req.login 함수 호출되면서 이 함수가 호출된다.
   // 역할: 서버 메모리를 아끼기 위해 많은 사용자 정보 중에서 필요한 부분만 메모리에 저장하도록함. (여기에서는 id)
@@ -17,6 +18,7 @@ module.exports = () => {
   // 최종적으로, req.user에 해당 user 정보 들어간다.
   passport.deserializeUser(async (id, done) => {
     try {
+      console.log(id);
       const user = await User.findOne({ where: { id } });
       done(null, user);
     } catch (error) {
