@@ -18,7 +18,6 @@ module.exports = () => {
   // 최종적으로, req.user에 해당 user 정보 들어간다.
   passport.deserializeUser(async (id, done) => {
     try {
-      console.log(id);
       const user = await User.findOne({ where: { id } });
       done(null, user);
     } catch (error) {

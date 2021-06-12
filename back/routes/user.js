@@ -2,30 +2,7 @@ const express = require("express");
 const bcrypt = require("bcrypt");
 const { User, Post } = require("../models");
 
-/**
- * @swagger
- *  tags:
- *    name: Users
- *    description: User management
- */
-
 const router = express.Router();
-/**
- * @swagger
- * path:
- *  /user:
- *    get:
- *      summary: "Select User"
- *      tags: [Users]
- *      response:
- *        "200":
- *          description: A user schema
- *          content:
- *            application/json:
- *              schema:
- *                $ref: '#/components/schemas/User'
- *
- */
 
 // 로그인 여부에 상관없이 매번 새로고침마다 전달되는 요청이다.
 router.get("/", async (req, res, next) => {
@@ -64,22 +41,8 @@ router.get("/", async (req, res, next) => {
     next(error);
   }
 });
-/**
- * @swagger
- * path:
- *  /user:
- *    post:
- *      summary: "Sign-up"
- *      tags: [Users]
- *      response:
- *        "200":
- *          description: Sign-up
- *          content:
- *            application/json:
- *              schema:
- *                $ref: '#/components/schemas/User'
- *
- */
+
+//Sign-up
 router.post("/", async (req, res, next) => {
   try {
     const existed = await User.findOne({
