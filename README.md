@@ -14,7 +14,7 @@
   ```
   npx create-next-app
   ```
-  - node*modules에 설치  (package.json 설정 변경 필요)
+  - node_modules에 설치  (package.json 설정 변경 필요)
   ```
   yarn add next
   ```
