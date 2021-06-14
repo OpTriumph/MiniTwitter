@@ -2,6 +2,7 @@ import Head from "next/head";
 import { createMuiTheme } from "@material-ui/core/styles";
 import { ThemeProvider } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
+import { wrapper } from "../redux/store";
 
 // Create a theme instance.
 const theme = createMuiTheme({
@@ -29,5 +30,5 @@ function MyApp({ Component, pageProps }) {
     </>
   );
 }
-
-export default MyApp;
+//export default MyApp;
+export default wrapper.withRedux(MyApp);
