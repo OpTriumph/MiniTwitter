@@ -6,26 +6,12 @@
 - 로그인 화면으로 접속하여 로그인 버튼을 누르면 home으로 접속
 - 왼쪽 메뉴의 home, profile을 클릭하면 각각의 페이지로 이동
 - 트윗 버튼을 누르면 다이얼로그 창이 나와 트윗 입력 가능
+- local 회원가입
+- local 로그인
 
-## Setup
-
-- next.js
-  - next CRA 사용
-  ```
-  npx create-next-app
-  ```
-  - node*modules에 설치  (package.json 설정 변경 필요)
-  ```
-  yarn add next
-  ```
-- material-ui
-  ```
-  yarn add @material-ui/core
-  yarn add @material-ui/icons
-  ```
 
 ## 실행
-
+ 
 ```
 yarn dev
 ```
@@ -42,6 +28,7 @@ yarn dev
 |      +-- TwitDialog.js         (트윗버튼 클릭시 나오는 트윗 작성 다이얼로그)
 |      +-- TwitMenu.js           (home과 profile 페이지 왼쪽의 메뉴들)
 |      +-- TwitProfile.js        (profile 페이지)
+|      +-- ProfileDialog.js      (profile 수정 다이얼로그)
 |
 +-- pages                        (각 웹페이지들을 포함하는 폴더)
 |      +-- _app.js               (title, theme 색상 지정)
@@ -49,11 +36,20 @@ yarn dev
 |      +-- home.js               (트위터 homepage)
 |      +-- index.js              (로그인 페이지. 처음 이 페이지가 열림)
 |      +-- profile.js            (프로필 페이지)
+|      +-- signup.js             (회원가입 페이지. 로그인 페이지에서 접근 가능)
 |
-+--public                                      (페이지에서 사용할 이미지파일들)
-       +-- btnG_완성형.png                     (네이버 로그인 이미지)
-       +-- kakao_login_medium_narrow.png       (카카오 로그인 이미지)
-       +-- weather.jpg                         (시간 날씨 박스에 나타나는 이미지)
++-- public                                      (페이지에서 사용할 이미지파일들)
+|      +-- btnG_완성형.png                     (네이버 로그인 이미지)
+|      +-- kakao_login_medium_narrow.png       (카카오 로그인 이미지)
+|      +-- weather.jpg                         (시간 날씨 박스에 나타나는 이미지)
+|
++-- redux
+|      +-- store.js                     (redux, redux-saga store)
+|      +-- user.js                      (login, signup, logout의 reducer)
+|
++-- sagas
+|      +-- user.js                     (redux/user에서 사용되는 saga)
+
 ```
 
 ## 참고 사이트 & 코드
