@@ -1,36 +1,14 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
-const passport = require("passport");
 const { User, Post } = require("../models");
 
-/**
- * @swagger
- *  tags:
- *    name: Users
- *    description: User management
- */
-
 const router = express.Router();
-/**
- * @swagger
- * path:
- *  /user:
- *    get:
- *      summary: "Select User"
- *      tags: [Users]
- *      response:
- *        "200":
- *          description: A user schema
- *          content:
- *            application/json:
- *              schema:
- *                $ref: '#/components/schemas/User'
- *
- */
+
+// 로그인 여부에 상관없이 매번 새로고침마다 전달되는 요청이다.
 router.get("/", async (req, res, next) => {
   try {
     if (req.user) {
-      // deserializeUser 호출 되면서 req.user에 로그인 된 사용자 정보가 들어간다.
+      // deserializeUser 호출 되면서, 만약 서버에서 로그인이 되어 있는 상황이라면 req.user에 로그인 된 사용자 정보가 들어간다.
       const userInfo = await User.findOne({
         where: { id: req.user.id },
         attributes: {
@@ -39,6 +17,7 @@ router.get("/", async (req, res, next) => {
         include: [
           {
             model: Post,
+            // 숫자만 활용할 예정이므로 id만 전송해서 과부하를 줄인다.
             attributes: ["id"],
           },
           {
@@ -62,22 +41,8 @@ router.get("/", async (req, res, next) => {
     next(error);
   }
 });
-/**
- * @swagger
- * path:
- *  /user:
- *    post:
- *      summary: "Sign-up"
- *      tags: [Users]
- *      response:
- *        "200":
- *          description: Sign-up
- *          content:
- *            application/json:
- *              schema:
- *                $ref: '#/components/schemas/User'
- *
- */
+
+//Sign-up
 router.post("/", async (req, res, next) => {
   try {
     const existed = await User.findOne({
@@ -116,8 +81,8 @@ router.post("/", async (req, res, next) => {
  */
 
 router.post("/logout", (req, res, next) => {
-  req.logout();
-  req.session.destroy();
+  req.logout(); // req.user 객체 제거
+  req.session.destroy(); // req.session 내용 제거
   req.status(200).send("ok");
 });
 
