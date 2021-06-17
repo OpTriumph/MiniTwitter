@@ -43,6 +43,7 @@ router.get("/", async (req, res, next) => {
 });
 
 //Sign-up
+
 router.post("/", async (req, res, next) => {
   try {
     const existed = await User.findOne({
@@ -63,22 +64,6 @@ router.post("/", async (req, res, next) => {
     next(error);
   }
 });
-/**
- * @swagger
- * path:
- *  /user:
- *    post:
- *      summary: "Logout"
- *      tags: [Users]
- *      response:
- *        "200":
- *          description: logout
- *          content:
- *            application/json:
- *              schema:
- *                $ref: '#/components/schemas/User'
- *
- */
 
 router.post("/logout", (req, res, next) => {
   req.logout(); // req.user 객체 제거
