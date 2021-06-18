@@ -5,12 +5,11 @@ module.exports = class Post extends Model {
   static init(sequelize) {
     return super.init(
       {
-        // id가 기본적으로 들어있다.
+        // id가 기본적으로 들어간다.
         content: {
           type: DataTypes.TEXT,
           allowNull: false,
         },
-        // RetweetId
       },
       {
         modelName: "Post",

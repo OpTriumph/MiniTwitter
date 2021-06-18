@@ -10,7 +10,6 @@ const session = require("express-session");
 const cookieParser = require("cookie-parser");
 
 const { sequelize } = require("./models");
-
 const app = express();
 
 app.use(express.json());
@@ -24,7 +23,7 @@ app.use(
 );
 
 sequelize
-  .sync({ force: false }) // true시 서버 재실행마다 테이블 재생성
+  .sync({ force: true }) // true시 서버 재실행마다 테이블 재생성
   .then(() => {
     console.log("success connection DB");
   })

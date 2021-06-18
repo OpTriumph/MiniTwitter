@@ -1,22 +1,29 @@
-const DataTypes = require("sequelize");
-const { Model } = DataTypes;
+const dataTypes = require("sequelize");
+const { Model } = dataTypes;
 
 module.exports = class User extends Model {
+  //static 메서드 선언으로 클래스의 인스턴스 없이 사용
   static init(sequelize) {
+    //Model의 init을 호출
     return super.init(
       {
+        provider: {
+          type: dataTypes.STRING(20),
+          allowNull: true,
+          unique: false,
+        },
         email: {
-          type: DataTypes.STRING(50), // STRING, TEXT, BOOLEAN, INTEGER, FLOAT, DATETIME
-          allowNull: false, // 필수
+          type: dataTypes.STRING(50), // STRING, TEXT, BOOLEAN, INTEGER, FLOAT, DATETIME
+          allowNull: true,
           unique: true, // 고유한 값
         },
         nickname: {
-          type: DataTypes.STRING(20),
-          allowNull: false, // 필수
+          type: dataTypes.STRING(20),
+          allowNull: false,
         },
         password: {
-          type: DataTypes.STRING(100),
-          allowNull: false, // 필수
+          type: dataTypes.STRING(100),
+          allowNull: true,
         },
       },
       {
@@ -28,6 +35,7 @@ module.exports = class User extends Model {
       }
     );
   }
+
   static associate(db) {
     db.User.hasMany(db.Post);
     db.User.hasMany(db.Comment);
