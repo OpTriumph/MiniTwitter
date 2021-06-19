@@ -34,7 +34,7 @@ export default function SignInSide() {
   const dispatch = useDispatch();
   const logInError = useSelector((state) => state.userReducer.logInError);
   const logInDone = useSelector((state) => state.userReducer.logInDone);
-
+  password;
   useEffect(() => {
     if (logInError) {
       if (logInError.status === 401)

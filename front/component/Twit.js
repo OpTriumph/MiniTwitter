@@ -14,6 +14,8 @@ import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
+import tweetReducer from "../redux/tweets2";
+import { useDispatch, useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -22,8 +24,18 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Twit() {
+function Twit({ tweet }) {
+  const dispatch = useDispatch();
+  const { id, title, userId, likes } = tweet || {};
+  // const liked = tweets.likers.find((v) => v.id === id);
   const classes = useStyles();
+  const handledelete = () => {
+    if (!id) {
+      return alert("need to login first");
+    }
+    return dispatch(tweetSlice.actions.deleteTweet(id));
+  };
+
   return (
     <Card>
       <CardHeader
@@ -45,13 +57,13 @@ function Twit() {
         subheader={
           <>
             <Typhography variant="body2" component="span">
-              @TempUser1 · May 25
+              @{id} · May 25
             </Typhography>
           </>
         }
       />
       <CardContent>
-        <Typhography variant="body1">무슨 일이 일어나고 있나요?</Typhography>
+        <Typhography variant="body1">{title}</Typhography>
       </CardContent>
 
       <CardActions>
@@ -80,14 +92,31 @@ function Twit() {
   );
 }
 
-export default function TwitLine() {
+export default function TwitLine({ tweets }) {
+  if (tweets.length < 1) return null;
+  console.log(tweets.shift());
+  console.log("test");
   const classes = useStyles();
+
   return (
     <Grid item xs>
       <Paper variant="outlined" className={classes.paper}>
         <b>최신 트윗</b>
       </Paper>
-      <Twit />
+
+      {/* <Twit /> */}
+      {tweets
+        // .slice(0)
+        .shift()
+        .reverse()
+        .map((tweet) => (
+          <Twit
+            key={tweet.id}
+            tweet={tweet}
+            // likeTweet={likeTweet}
+            // deleteTweet={deleteTweet}
+          />
+        ))}
       <Paper variant="outlined" className={classes.paper}>
         <Twit />
         <Twit />

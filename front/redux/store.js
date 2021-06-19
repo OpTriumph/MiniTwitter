@@ -5,9 +5,10 @@ import { createWrapper } from "next-redux-wrapper";
 
 import userReducer from "./user";
 import { combineReducers } from "redux";
-
 import { all } from "redux-saga/effects";
 import userSaga from "../sagas/user";
+import tweetSaga from "../sagas/tweets2";
+import tweetReducer from "../redux/tweets2";
 
 const bindMiddleware = (middleware) => {
   return composeWithDevTools(applyMiddleware(...middleware));
@@ -16,10 +17,11 @@ const bindMiddleware = (middleware) => {
 
 const rootReducer = combineReducers({
   userReducer,
+  tweetReducer,
 });
 
 function* rootSaga() {
-  yield all([userSaga()]);
+  yield all([userSaga(), tweetSaga()]);
 }
 
 const createTweetStore = () => {

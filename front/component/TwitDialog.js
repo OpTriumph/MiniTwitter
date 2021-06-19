@@ -10,7 +10,50 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Grid from "@material-ui/core/Grid";
 
+import { useDispatch, useSelector } from "react-redux";
+import { useState, useEffect } from "react";
+import tweetReducer from "../redux/tweets2";
+import { addtweet } from "../redux/tweets2";
+
 export default function TwitDialog({ open, handleClose }) {
+  const AddTweetError = useSelector(
+    (state) => state.tweetReducer.AddTweetError
+  );
+  const AddTweetAdding = useSelector(
+    (state) => state.tweetReducer.AddTweetAdding
+  );
+
+  const AddTweetDone = useSelector((state) => state.tweetReducer.AddTweetDone);
+
+  const [text, setText] = useState("");
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (AddTweetError) {
+      alert(AddTweetError.data);
+    }
+    if (AddTweetDone) {
+      setText("");
+    }
+  }, [AddTweetDone, AddTweetError]);
+
+  const handleChange = (event) => {
+    setText(event.target.value);
+  };
+  const handleTweet = (event) => {
+    if (event.type !== "click") {
+      return;
+    }
+    if (text === "") {
+      return;
+    }
+    dispatch(addtweet({ text }));
+    handleClose();
+    setText("");
+  };
+
+  // dispatch(signUpAction({ email, password, nickname }));
+
   return (
     <Dialog
       open={open}
@@ -36,6 +79,8 @@ export default function TwitDialog({ open, handleClose }) {
               autoFocus
               multiline
               rows={9}
+              value={text}
+              onChange={handleChange}
               placeholder="무슨일이 일어나고 있나요?"
               fullWidth
             />
@@ -49,6 +94,8 @@ export default function TwitDialog({ open, handleClose }) {
           color="primary"
           variant="contained"
           size="large"
+          onClick={handleTweet}
+          loading={AddTweetAdding}
         >
           트윗
         </Button>
