@@ -29,7 +29,7 @@ router.post("/login", (req, res, next) => {
             model: Post,
             attributes: ["id"],
           },
-          {
+          /*{
             model: User,
             as: "Followings",
             attributes: ["id"],
@@ -38,25 +38,12 @@ router.post("/login", (req, res, next) => {
             model: User,
             as: "Followers",
             attributes: ["id"],
-          },
+          },*/
         ],
       });
       return res.status(200).json(userInfo);
     });
   })(req, res, next);
 });
-
-router.get("/kakao", passport.authenticate("kakao"));
-
-router.get(
-  "/kakao/callback",
-  passport.authenticate("kakao", {
-    failureRedirect: "/",
-  }),
-  (req, res) => {
-    res.cookie("hi", 0);
-    res.send("hi");
-  }
-);
 
 module.exports = router;
