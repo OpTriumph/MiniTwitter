@@ -54,7 +54,8 @@ router.get(
     failureRedirect: "/",
   }),
   (req, res) => {
-    res.redirect("/");
+    res.cookie("hi", 0);
+    res.send("hi");
   }
 );
 

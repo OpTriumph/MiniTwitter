@@ -1,7 +1,7 @@
 const DataTypes = require("sequelize");
 const { Model } = DataTypes;
 
-module.exports = class Comment extends Model {
+class Comment extends Model {
   static init(sequelize) {
     return super.init(
       {
@@ -23,4 +23,6 @@ module.exports = class Comment extends Model {
     db.Comment.belongsTo(db.User);
     db.Comment.belongsTo(db.Post);
   }
-};
+}
+
+module.exports = Comment;
