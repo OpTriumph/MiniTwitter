@@ -1,6 +1,4 @@
 const passport = require("passport");
-const kakao = require("./kakao");
-const naver = require("./naver");
 const local = require("./local");
 const { User } = require("../models");
 module.exports = () => {

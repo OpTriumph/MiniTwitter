@@ -20,16 +20,6 @@ router.get("/", async (req, res, next) => {
             // 숫자만 활용할 예정이므로 id만 전송해서 과부하를 줄인다.
             attributes: ["id"],
           },
-          {
-            model: User,
-            as: "Followings",
-            attributes: ["id"],
-          },
-          {
-            model: User,
-            as: "Followers",
-            attributes: ["id"],
-          },
         ],
       });
       res.status(200).json(userInfo);
