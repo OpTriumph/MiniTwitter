@@ -8,7 +8,7 @@ import TwitMenu from "../component/TwitMenu.js";
 
 import { useDispatch, useSelector } from "react-redux";
 
-import { addtweet, LOAD_TWEET_REQUEST } from "../redux/tweets2.js";
+import { LOAD_TWEET_REQUEST } from "../redux/tweets2.js";
 import { LOAD_INFO_REQUEST } from "../redux/user.js";
 
 export default function Home() {
@@ -19,8 +19,9 @@ export default function Home() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(addtweet({text}));
-  });
+    dispatch({
+      type: LOAD_INFO_REQUEST,
+    });
     dispatch({
       type: LOAD_TWEET_REQUEST,
     });
