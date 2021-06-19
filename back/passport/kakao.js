@@ -12,13 +12,14 @@ module.exports = () => {
       async (accessToken, refreshToken, profile, done) => {
         try {
           const user = await User.findOne({
-            where: { id: profile.id },
+            where: { id: profile.id, provider: "kakao" },
           });
           if (user) {
-            done(null, exUser);
+            done(null, user);
           } else {
+            console.log(profile);
             const newUser = await User.create({
-              email: profile._json && profile._json.kakao_account_email,
+              provider: "kakao",
               nickname: profile.displayName,
               id: profile.id,
             });
