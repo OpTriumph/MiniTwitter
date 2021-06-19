@@ -1,13 +1,17 @@
-const DataTypes = require("sequelize");
-const { Model } = DataTypes;
+const dataTypes = require("sequelize");
+const { Model } = dataTypes;
 
-module.exports = class Post extends Model {
+class Post extends Model {
   static init(sequelize) {
     return super.init(
       {
         // id가 기본적으로 들어간다.
+        UserId: {
+          type: dataTypes.STRING(50),
+          allowNull: false,
+        },
         content: {
-          type: DataTypes.TEXT,
+          type: dataTypes.TEXT,
           allowNull: false,
         },
       },
@@ -26,4 +30,6 @@ module.exports = class Post extends Model {
     db.Post.belongsTo(db.User); // post.addUser, post.getUser, post.setUser
     db.Post.belongsTo(db.Post, { as: "Retweet" }); // post.addRetweet
   }
-};
+}
+
+module.exports = Post;

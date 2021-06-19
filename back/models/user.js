@@ -1,7 +1,7 @@
 const dataTypes = require("sequelize");
 const { Model } = dataTypes;
 
-module.exports = class User extends Model {
+class User extends Model {
   //static 메서드 선언으로 클래스의 인스턴스 없이 사용
   static init(sequelize) {
     //Model의 init을 호출
@@ -51,4 +51,6 @@ module.exports = class User extends Model {
       foreignKey: "FollowerId",
     });
   }
-};
+}
+
+module.exports = User;

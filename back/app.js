@@ -3,6 +3,7 @@ const cors = require("cors");
 const postRouter = require("./routes/post");
 const userRouter = require("./routes/user");
 const authRouter = require("./routes/auth");
+const postsRouter = require("./routes/post");
 const passport = require("passport");
 const passportConfig = require("./passport");
 const { swaggerUi, specs } = require("./swagger");
@@ -54,6 +55,7 @@ app.get("/", (req, res) => {
 app.use("/post", postRouter);
 app.use("/user", userRouter);
 app.use("/auth", authRouter);
+app.use("/posts", postsRouter);
 app.listen(3065, () => {
   console.log("Running Server..");
 });
