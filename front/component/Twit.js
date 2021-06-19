@@ -25,10 +25,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Twit({ tweet }) {
-  const dispatch = useDispatch();
   const { id, title, userId, likes } = tweet || {};
-  // const liked = tweets.likers.find((v) => v.id === id);
-  const classes = useStyles();
+  const dispatch = useDispatch();
+
   const handledelete = () => {
     if (!id) {
       return alert("need to login first");
@@ -36,6 +35,7 @@ function Twit({ tweet }) {
     return dispatch(tweetSlice.actions.deleteTweet(id));
   };
 
+  const classes = useStyles();
   return (
     <Card>
       <CardHeader
@@ -57,7 +57,7 @@ function Twit({ tweet }) {
         subheader={
           <>
             <Typhography variant="body2" component="span">
-              @{id} · May 25
+              @{userId} · May 25
             </Typhography>
           </>
         }
@@ -95,9 +95,10 @@ function Twit({ tweet }) {
 export default function TwitLine({ tweets }) {
   if (tweets.length < 1) return null;
   console.log(tweets.shift());
-  console.log("test");
   const classes = useStyles();
-
+  {
+    // tweets.shift().map((post) => console.log(post));
+  }
   return (
     <Grid item xs>
       <Paper variant="outlined" className={classes.paper}>
@@ -107,8 +108,7 @@ export default function TwitLine({ tweets }) {
       {/* <Twit /> */}
       {tweets
         // .slice(0)
-        .shift()
-        .reverse()
+        // .reverse()
         .map((tweet) => (
           <Twit
             key={tweet.id}

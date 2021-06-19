@@ -447,7 +447,7 @@ module.exports = require("redux-saga/effects");;
 var __webpack_require__ = require("../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
-var __webpack_exports__ = __webpack_require__.X(0, ["vendors-node_modules_material-ui_core_esm_styles_index_js","vendors-node_modules_material-ui_core_esm_CssBaseline_index_js","redux_tweets2_js-redux_user_js"], function() { return __webpack_exec__("./pages/_app.js"); });
+var __webpack_exports__ = __webpack_require__.X(0, ["vendors-node_modules_material-ui_core_esm_styles_index_js","vendors-node_modules_material-ui_core_esm_CssBaseline_index_js","redux_user_js","redux_tweets2_js"], function() { return __webpack_exec__("./pages/_app.js"); });
 module.exports = __webpack_exports__;
 
 })();

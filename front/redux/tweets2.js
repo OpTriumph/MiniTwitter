@@ -44,7 +44,7 @@ const tweetReducer = (state = initialState, action) => {
       state.LoadTweetLoading = false;
       state.LoadTweetDone = true;
       state.LoadTweetError = null;
-      state.tweets.concat(action.data);
+      state.tweets = state.tweets.concat(action.data);
 
     case LOAD_TWEET_FAIL:
       state.LoadTweetLoading = false;

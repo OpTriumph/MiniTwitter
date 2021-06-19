@@ -19,9 +19,9 @@ export default function Home() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch({
-      type: LOAD_INFO_REQUEST,
-    });
+    // dispatch({
+    //   type: LOAD_INFO_REQUEST,
+    // });
     dispatch({
       type: LOAD_TWEET_REQUEST,
     });

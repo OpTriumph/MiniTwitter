@@ -16,6 +16,8 @@ import tweetReducer from "../redux/tweets2";
 import { addtweet } from "../redux/tweets2";
 
 export default function TwitDialog({ open, handleClose }) {
+  const [text, setText] = useState("");
+  const dispatch = useDispatch();
   const AddTweetError = useSelector(
     (state) => state.tweetReducer.AddTweetError
   );
@@ -24,9 +26,6 @@ export default function TwitDialog({ open, handleClose }) {
   );
 
   const AddTweetDone = useSelector((state) => state.tweetReducer.AddTweetDone);
-
-  const [text, setText] = useState("");
-  const dispatch = useDispatch();
 
   useEffect(() => {
     if (AddTweetError) {
