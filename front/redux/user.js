@@ -51,63 +51,78 @@ export const signUpAction = (data) => {
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOGIN_REQUEST:
-      state.logInLoading = true;
-      state.logInDone = false;
-      state.logInError = null;
-      break;
+      return {
+        ...state,
+        logInLoading: true,
+        logInDone: false,
+        logInError: null,
+      };
 
     case LOGIN_SUCCESS:
-      state.logInDone = true;
-      state.logInLoading = false;
-      state.logInError = null;
-      state.myInfo = action.data;
-      break;
+      return {
+        ...state,
+        logInDone: true,
+        logInLoading: false,
+        logInError: null,
+        myInfo: action.data,
+      };
 
     case LOGIN_FAIL:
-      state.logInLoading = false;
-      state.logInError = action.error;
-      break;
+      return {
+        logInLoading: false,
+        logInError: action.error,
+      };
 
     case LOGOUT_REQUEST:
-      state.logOutLoading = true;
-      state.logOutDone = false;
-      state.logOutError = null;
-      break;
+      return {
+        ...state,
+        logOutLoading: true,
+        logOutDone: false,
+        logOutError: null,
+      };
 
     case LOGOUT_SUCCESS:
-      state.logOutLoading = false;
-      state.logOutDone = true;
-      state.logOutError = null;
-      state.logInDone = false;
-      state.myInfo = null;
-      state.userInfo = null;
-      break;
-
+      return {
+        ...state,
+        logOutLoading: false,
+        logOutDone: true,
+        logOutError: null,
+        logInDone: false,
+        myInfo: null,
+        userInfo: null,
+      };
     case LOGOUT_FAIL:
-      state.logOutLoading = false;
-      state.logOutError = action.error;
+      return {
+        ...state,
+        logOutLoading: false,
+        logOutError: action.error,
+      };
 
-      break;
     case SIGNUP_REQUEST:
-      state.signUpLoading = true;
-      state.signUpDone = false;
-      state.signUpError = null;
-      break;
+      return {
+        ...state,
+        signUpLoading: true,
+        signUpDone: false,
+        signUpError: null,
+      };
 
     case SIGNUP_SUCCESS:
-      state.signUpLoading = false;
-      state.signUpDone = true;
-      break;
+      return {
+        ...state,
+        signUpLoading: false,
+        signUpDone: true,
+      };
 
     case SIGNUP_FAIL:
-      state.signUpLoading = false;
-      state.signUpError = action.error;
-      break;
+      return {
+        ...state,
+        signUpLoading: false,
+        signUpError: action.error,
+      };
 
     default:
-      break;
+      return state;
   }
-  return state;
 };
 
 export default userReducer;
