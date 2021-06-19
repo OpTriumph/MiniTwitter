@@ -1,4 +1,4 @@
-import { all, put, call, takeLatest } from "redux-saga/effects";
+import { put, call, takeLatest } from "redux-saga/effects";
 import axios from "axios";
 
 import {
@@ -8,6 +8,9 @@ import {
   SIGNUP_SUCCESS,
   SIGNUP_FAIL,
   SIGNUP_REQUEST,
+  LOGOUT_SUCCESS,
+  LOGOUT_FAIL,
+  LOGOUT_REQUEST,
 } from "../redux/user";
 
 function loginPost(data) {
@@ -41,10 +44,9 @@ function signupPost(data) {
 }
 function* signupRequest(action) {
   try {
-    const res = yield call(signupPost, action.payload);
+    yield call(signupPost, action.payload);
     yield put({
       type: SIGNUP_SUCCESS,
-      data: res.data,
     });
   } catch (error) {
     yield put({
@@ -53,8 +55,24 @@ function* signupRequest(action) {
     });
   }
 }
-
+function logoutPost() {
+  return axios.post("http://localhost:3065/user/logout");
+}
+function* logoutRequest(action) {
+  try {
+    yield call(logoutPost);
+    yield put({
+      type: LOGOUT_SUCCESS,
+    });
+  } catch (error) {
+    yield put({
+      type: LOGOUT_FAIL,
+      error: error,
+    });
+  }
+}
 export default function* userSaga() {
   yield takeLatest(LOGIN_REQUEST, loginRequest);
   yield takeLatest(SIGNUP_REQUEST, signupRequest);
+  yield takeLatest(LOGOUT_REQUEST, logoutRequest);
 }

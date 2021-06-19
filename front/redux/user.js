@@ -3,6 +3,10 @@ export const initialState = {
   logInDone: false,
   logInError: null,
 
+  logOutLoading: false,
+  logOutDone: false,
+  logOutError: null,
+
   loadInfoLoading: false, //load user info of logined
   loadInfoDone: false,
   loadInfoError: null,
@@ -18,6 +22,10 @@ export const initialState = {
 export const LOGIN_REQUEST = "user/LOGIN_REQUEST";
 export const LOGIN_SUCCESS = "user/LOGIN_SUCESS";
 export const LOGIN_FAIL = "user/LOGIN_FAIL";
+
+export const LOGOUT_REQUEST = "user/LOGOUT_REQUEST";
+export const LOGOUT_SUCCESS = "user/LOGOUT_SUCCESS";
+export const LOGOUT_FAIL = "user/LOGOUT_FAIL";
 
 export const SIGNUP_REQUEST = "user/SIGNUP_REQUEST";
 export const SIGNUP_SUCCESS = "user/SIGNUP_SUCESS";
@@ -47,17 +55,39 @@ const userReducer = (state = initialState, action) => {
       state.logInDone = false;
       state.logInError = null;
       break;
+
     case LOGIN_SUCCESS:
       state.logInDone = true;
       state.logInLoading = false;
       state.logInError = null;
       state.myInfo = action.data;
       break;
+
     case LOGIN_FAIL:
       state.logInLoading = false;
       state.logInError = action.error;
       break;
 
+    case LOGOUT_REQUEST:
+      state.logOutLoading = true;
+      state.logOutDone = false;
+      state.logOutError = null;
+      break;
+
+    case LOGOUT_SUCCESS:
+      state.logOutLoading = false;
+      state.logOutDone = true;
+      state.logOutError = null;
+      state.logInDone = false;
+      state.myInfo = null;
+      state.userInfo = null;
+      break;
+
+    case LOGOUT_FAIL:
+      state.logOutLoading = false;
+      state.logOutError = action.error;
+
+      break;
     case SIGNUP_REQUEST:
       state.signUpLoading = true;
       state.signUpDone = false;
@@ -68,6 +98,7 @@ const userReducer = (state = initialState, action) => {
       state.signUpLoading = false;
       state.signUpDone = true;
       break;
+
     case SIGNUP_FAIL:
       state.signUpLoading = false;
       state.signUpError = action.error;
