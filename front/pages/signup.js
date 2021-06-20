@@ -9,6 +9,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Router from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import { signUpAction } from "../redux/user";
+import { ReqDialog } from "dialog_requirement-twtpj";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -32,7 +33,20 @@ export default function SignInSide() {
   const dispatch = useDispatch();
   const signUpError = useSelector((state) => state.userReducer.signUpError);
   const signUpDone = useSelector((state) => state.userReducer.signUpDone);
+  const [valid, setValid] = React.useState(false);
 
+  const userNameRequirement = [
+    {
+      text: "Must be at least 3 characters",
+      validator: (val) => val.length >= 3,
+    },
+  ];
+  const passwordRequirement = [
+    {
+      text: "Must be at least 5 characters",
+      validator: (val) => val.length >= 5,
+    },
+  ];
   useEffect(() => {
     if (signUpError) {
       alert(signUpError.data);
@@ -60,6 +74,11 @@ export default function SignInSide() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
+          <ReqDialog
+            value={nickname}
+            Requirements={userNameRequirement}
+            onValidChange={(isValid) => setValid(isValid)}
+          />
           <TextField
             variant="outlined"
             margin="normal"
@@ -70,6 +89,11 @@ export default function SignInSide() {
             name="nickname"
             value={nickname}
             onChange={(e) => setNickname(e.target.value)}
+          />
+          <ReqDialog
+            value={password}
+            Requirements={passwordRequirement}
+            onValidChange={(isValid) => setValid(isValid)}
           />
           <TextField
             variant="outlined"
@@ -103,6 +127,7 @@ export default function SignInSide() {
             variant="contained"
             color="primary"
             className={classes.submit}
+            disabled={!valid || (!nickname && !password)}
             onClick={() => {
               dispatch(signUpAction({ email, password, nickname }));
             }}
