@@ -22,6 +22,7 @@ module.exports = () => {
           if (!result) {
             return done(null, false, { reason: "비밀번호를 확인 해 주세요" });
           }
+          console.log("hi");
           return done(null, user); // 이메일, 비밀번호 일치
         } catch (error) {
           console.error(error);

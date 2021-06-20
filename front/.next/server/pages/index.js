@@ -441,7 +441,7 @@ module.exports = require("react/jsx-dev-runtime");;
 var __webpack_require__ = require("../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
-var __webpack_exports__ = __webpack_require__.X(0, ["vendors-node_modules_material-ui_core_esm_styles_index_js","vendors-node_modules_next_dist_client_request-idle-callback_js-node_modules_next_node_modules-ad777a","vendors-node_modules_material-ui_core_esm_Button_index_js-node_modules_material-ui_core_esm_C-7bb174","redux_user_js"], function() { return __webpack_exec__("./pages/index.js"); });
+var __webpack_exports__ = __webpack_require__.X(0, ["vendors-node_modules_material-ui_core_esm_styles_index_js","vendors-node_modules_material-ui_core_esm_Button_index_js-node_modules_material-ui_core_esm_C-32df40","vendors-node_modules_next_image_js","redux_user_js"], function() { return __webpack_exec__("./pages/index.js"); });
 module.exports = __webpack_exports__;
 
 })();

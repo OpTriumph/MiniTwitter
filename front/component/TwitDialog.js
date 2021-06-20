@@ -1,7 +1,6 @@
 import Avatar from "@material-ui/core/Avatar";
 import IconButton from "@material-ui/core/IconButton";
 import ClearIcon from "@material-ui/icons/Clear";
-import React from "react";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Dialog from "@material-ui/core/Dialog";
@@ -9,8 +8,29 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Grid from "@material-ui/core/Grid";
+import React, { useCallback, useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { ADD_TWEET_REQUEST } from "../redux/post";
 
 export default function TwitDialog({ open, handleClose }) {
+  const dispatch = useDispatch();
+  const [text, setText] = useState("");
+  const onChangeText = (e) => {
+    setText(e.target.value);
+    console.log(text);
+  };
+  const handleTweet = useCallback(() => {
+    if (!text) {
+      return alert("게시글을 작성하세요.");
+    }
+    return dispatch({
+      type: ADD_TWEET_REQUEST,
+      data: {
+        content: text,
+      },
+    });
+  }, [text]);
+
   return (
     <Dialog
       open={open}
@@ -35,6 +55,8 @@ export default function TwitDialog({ open, handleClose }) {
               id="write-new-twit"
               autoFocus
               multiline
+              value={text}
+              onChange={onChangeText}
               rows={9}
               placeholder="무슨일이 일어나고 있나요?"
               fullWidth
@@ -45,7 +67,7 @@ export default function TwitDialog({ open, handleClose }) {
 
       <DialogActions>
         <Button
-          onClick={handleClose}
+          onClick={handleTweet}
           color="primary"
           variant="contained"
           size="large"

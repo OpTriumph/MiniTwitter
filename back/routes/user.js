@@ -22,9 +22,9 @@ router.get("/", async (req, res, next) => {
           },
         ],
       });
-      res.status(200).json(userInfo);
+      return res.status(200).json(userInfo);
     } else {
-      res.status(200).json(null);
+      return res.status(200).json(null);
     }
   } catch (error) {
     console.error(error);
