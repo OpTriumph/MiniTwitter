@@ -89,7 +89,7 @@ export default function TwitLine() {
         <b>최신 트윗</b>
       </Paper>
       {tweets.map((tweet) => (
-        <Tweet tweet={tweet} />
+        <Tweet key={tweet.id} tweet={tweet} />
       ))}
     </Grid>
   );

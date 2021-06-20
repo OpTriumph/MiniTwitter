@@ -126,7 +126,7 @@ export default function SignInSide() {
             fullWidth
             variant="contained"
             color="primary"
-            disabled={!valid || !nickname || !password}
+            disabled={!nickname || !password}
             className={classes.submit}
             onClick={() => {
               dispatch(signUpAction({ email, password, nickname }));
