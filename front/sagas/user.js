@@ -1,4 +1,4 @@
-import { all, put, call, takeLatest } from "redux-saga/effects";
+import { put, call, takeLatest } from "redux-saga/effects";
 import axios from "axios";
 
 import {
@@ -8,13 +8,23 @@ import {
   SIGNUP_SUCCESS,
   SIGNUP_FAIL,
   SIGNUP_REQUEST,
+  LOGOUT_SUCCESS,
+  LOGOUT_FAIL,
+  LOGOUT_REQUEST,
+  LOAD_INFO_SUCCESS,
+  LOAD_INFO_FAIL,
+  LOAD_INFO_REQUEST,
 } from "../redux/user";
 
 function loginPost(data) {
-  return axios.post("http://localhost:3065/auth/login", {
-    email: data.email,
-    password: data.password,
-  });
+  return axios.post(
+    "http://localhost:3065/auth/login",
+    {
+      email: data.email,
+      password: data.password,
+    },
+    { withCredentials: true }
+  );
 }
 
 function* loginRequest(action) {
@@ -41,10 +51,9 @@ function signupPost(data) {
 }
 function* signupRequest(action) {
   try {
-    const res = yield call(signupPost, action.payload);
+    yield call(signupPost, action.payload);
     yield put({
       type: SIGNUP_SUCCESS,
-      data: res.data,
     });
   } catch (error) {
     yield put({
@@ -54,7 +63,48 @@ function* signupRequest(action) {
   }
 }
 
+function logoutPost() {
+  return axios.post(
+    "http://localhost:3065/user/logout",
+    {},
+    { withCredentials: true }
+  );
+}
+function* logoutRequest(action) {
+  try {
+    yield call(logoutPost);
+    yield put({
+      type: LOGOUT_SUCCESS,
+    });
+  } catch (error) {
+    yield put({
+      type: LOGOUT_FAIL,
+      error: error,
+    });
+  }
+}
+
+function loadInfo(data) {
+  return axios.get("http://localhost:3065/user", { withCredentials: true });
+}
+
+function* loadInfoRequest(action) {
+  try {
+    const res = yield call(loadInfo, action.data, { withCredentials: true });
+    yield put({
+      type: LOAD_INFO_SUCCESS,
+      data: res.data,
+    });
+  } catch (error) {
+    yield put({
+      type: LOAD_INFO_FAIL,
+      error: error.response.data,
+    });
+  }
+}
 export default function* userSaga() {
   yield takeLatest(LOGIN_REQUEST, loginRequest);
   yield takeLatest(SIGNUP_REQUEST, signupRequest);
+  yield takeLatest(LOGOUT_REQUEST, logoutRequest);
+  yield takeLatest(LOAD_INFO_REQUEST, loadInfoRequest);
 }
