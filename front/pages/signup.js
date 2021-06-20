@@ -9,6 +9,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Router from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import { signUpAction } from "../redux/user";
+import { ReqDialog } from "dialog_requirement-twtpj";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -24,6 +25,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function SignInSide() {
+  const [valid, setValid] = React.useState(false);
   const classes = useStyles();
   const [email, setEmail] = React.useState("");
   const [nickname, setNickname] = React.useState("");
@@ -32,7 +34,18 @@ export default function SignInSide() {
   const dispatch = useDispatch();
   const signUpError = useSelector((state) => state.userReducer.signUpError);
   const signUpDone = useSelector((state) => state.userReducer.signUpDone);
-
+  const userNameRequirement = [
+    {
+      text: "Must be at least 3 characters",
+      validator: (val) => val.length >= 3,
+    },
+  ];
+  const passwordRequirement = [
+    {
+      text: "Must be at least 5 characters",
+      validator: (val) => val.length >= 5,
+    },
+  ];
   useEffect(() => {
     if (signUpError) {
       alert(signUpError.data);
@@ -60,6 +73,11 @@ export default function SignInSide() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
+          <ReqDialog
+            value={nickname}
+            Requirements={userNameRequirement}
+            onValidChange={(isValid) => setValid(isValid)}
+          />
           <TextField
             variant="outlined"
             margin="normal"
@@ -70,6 +88,11 @@ export default function SignInSide() {
             name="nickname"
             value={nickname}
             onChange={(e) => setNickname(e.target.value)}
+          />
+          <ReqDialog
+            value={password}
+            Requirements={passwordRequirement}
+            onValidChange={(isValid) => setValid(isValid)}
           />
           <TextField
             variant="outlined"
@@ -102,6 +125,7 @@ export default function SignInSide() {
             fullWidth
             variant="contained"
             color="primary"
+            disabled={!valid || !nickname || !password}
             className={classes.submit}
             onClick={() => {
               dispatch(signUpAction({ email, password, nickname }));
