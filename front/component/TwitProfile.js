@@ -84,7 +84,8 @@ export default function TwitProfile({ user }) {
                   {/* user.nickname */}
                 </Typography>
                 <Typography variant="h6" style={{ color: "#afafaf" }}>
-                  {/* @아이디2 */}@{user.email}
+                  @{user.email}
+                  {/* //userid */}
                   {/* //or print useremal with @{user.email} */}
                 </Typography>
               </Grid>
@@ -114,8 +115,7 @@ export default function TwitProfile({ user }) {
             <Grid item xs>
               <Typography variant="body1">
                 {/* 미니트위터 자기소개란. Test */}
-                {user.Bio}
-                {/* // {user.Bio} */}
+                // {user.Bio}
               </Typography>
             </Grid>
 
