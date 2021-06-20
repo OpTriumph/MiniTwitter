@@ -26,5 +26,5 @@ module.exports = () => {
   });
   local();
   kakao();
-  //naver();
+  naver();
 };

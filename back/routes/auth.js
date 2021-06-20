@@ -51,12 +51,19 @@ router.get("/kakao", passport.authenticate("kakao"));
 router.get(
   "/kakao/callback",
   passport.authenticate("kakao", {
-    failureRedirect: "/",
-  }),
-  (req, res) => {
-    res.cookie("hi", 0);
-    res.send("hi");
-  }
+    failureRedirect: "http://localhost:3000",
+    successRedirect: "http://localhost:3000/home",
+  })
+);
+
+router.get("/naver", passport.authenticate("naver"));
+
+router.get(
+  "/naver/callback",
+  passport.authenticate("naver", {
+    failureRedirect: "http://localhost:3000",
+    successRedirect: "http://localhost:3000/home",
+  })
 );
 
 module.exports = router;

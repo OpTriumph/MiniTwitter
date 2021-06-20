@@ -6,7 +6,6 @@ import TwitterIcon from "@material-ui/icons/Twitter";
 
 import { makeStyles } from "@material-ui/core/styles";
 import Image from "next/image";
-import Link from "next/link";
 import Router from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import { logInAction } from "../redux/user";
@@ -102,26 +101,31 @@ export default function SignInSide() {
           </Button>
         </form>
         <div className={classes.buttons}>
-          <Link href="http://localhost:3065/auth/naver">
-            <Button disableRipple size="small">
-              <Image
-                src="/btnG_완성형.png"
-                alt="Naver Id login"
-                width={180}
-                height={40}
-              />
-            </Button>
-          </Link>
-          <Link href="http://localhost:3065/auth/kakao">
-            <Button disableRipple size="small">
-              <Image
-                src="/kakao_login_medium_narrow.png"
-                alt="Kakao Id login"
-                width={180}
-                height={40}
-              />
-            </Button>
-          </Link>
+          <Button
+            disableRipple
+            size="small"
+            onClick={() => Router.replace("http://localhost:3065/auth/naver")}
+          >
+            <Image
+              src="/btnG_완성형.png"
+              alt="Naver Id login"
+              width={180}
+              height={40}
+            />
+          </Button>
+
+          <Button
+            disableRipple
+            size="small"
+            onClick={() => Router.replace("http://localhost:3065/auth/kakao")}
+          >
+            <Image
+              src="/kakao_login_medium_narrow.png"
+              alt="Kakao Id login"
+              width={180}
+              height={40}
+            />
+          </Button>
         </div>
       </div>
     </Container>

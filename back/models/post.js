@@ -7,7 +7,7 @@ class Post extends Model {
       {
         // id가 기본적으로 들어간다.
         UserId: {
-          type: dataTypes.STRING(50),
+          type: dataTypes.INTEGER,
           allowNull: false,
         },
         content: {
