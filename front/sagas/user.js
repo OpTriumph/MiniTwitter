@@ -14,10 +14,14 @@ import {
 } from "../redux/user";
 
 function loginPost(data) {
-  return axios.post("http://localhost:3065/auth/login", {
-    email: data.email,
-    password: data.password,
-  });
+  return axios.post(
+    "http://localhost:3065/auth/login",
+    {
+      email: data.email,
+      password: data.password,
+    },
+    { withCredentials: true }
+  );
 }
 
 function* loginRequest(action) {
