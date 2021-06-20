@@ -23,7 +23,9 @@ function loginPost(data) {
       email: data.email,
       password: data.password,
     },
-    { withCredentials: true }
+    {
+      withCredentials: true,
+    }
   );
 }
 

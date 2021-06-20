@@ -28,7 +28,6 @@ class Post extends Model {
     db.Post.hasMany(db.Comment); // post.addComments, post.getComments
     db.Post.belongsToMany(db.User, { through: "Like", as: "Likers" }); // post.addLikers, post.removeLikers
     db.Post.belongsTo(db.User); // post.addUser, post.getUser, post.setUser
-    db.Post.belongsTo(db.Post, { as: "Retweet" }); // post.addRetweet
   }
 }
 

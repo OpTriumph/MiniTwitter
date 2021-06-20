@@ -11,7 +11,11 @@ import { useDispatch } from "react-redux";
 export default function Home() {
   const dispatch = useDispatch();
   const [open, setOpen] = React.useState(false);
-
+  useEffect(() => {
+    dispatch({
+      type: LOAD_INFO_REQUEST,
+    });
+  }, []);
   const handleClickOpen = () => {
     setOpen(true);
   };
