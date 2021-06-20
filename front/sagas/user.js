@@ -11,6 +11,13 @@ import {
   LOAD_INFO_REQUEST,
   LOAD_INFOP_SUCCESS,
   LOAD_INFO_FAIL,
+  ////////////////////
+  CHANGE_BIO_REQUEST,
+  CHANGE_BIO_SUCCESS,
+  CHANGE_BIO_FAIL,
+  CHANGE_NAME_REQUEST,
+  CHANGE_NAME_SUCCESS,
+  CHANGE_NAME_FAIL,
 } from "../redux/user";
 
 function loadInfo(data) {
@@ -83,9 +90,45 @@ function* signupRequest(action) {
     });
   }
 }
-
+////////////////////////////////////////////////////////////////////////////////////////////
+function changeName(data) {
+  return axios.patch("http://localhost:3065/user/nickname", { nickname: data });
+}
+function* changeNameRequest(action) {
+  try {
+    const res = yield call(changeName, action.payload);
+    yield put({
+      type: CHANGE_NAME_SUCCESS,
+      data: res.data,
+    });
+  } catch (error) {
+    yield put({
+      type: CHANGE_NAME_FAIL,
+      error: res.response,
+    });
+  }
+}
+function changeBio(data) {
+  return axios.patch("http://localhost:3065/user/nickBio", { Bio: data });
+}
+function* changeBioRequest(action) {
+  try {
+    const res = yield call(changeBio, action.payload);
+    yield put({
+      type: CHANGE_BIO_SUCCESS,
+      data: res.data,
+    });
+  } catch (error) {
+    yield put({
+      type: CHANGE_BIO_FAIL,
+      error: res.response,
+    });
+  }
+}
 export default function* userSaga() {
   yield takeLatest(LOGIN_REQUEST, loginRequest);
   yield takeLatest(SIGNUP_REQUEST, signupRequest);
   yield takeLatest(LOAD_INFO_REQUEST, loadInfoRequest);
+  yield takeLatest(CHANGE_NAME_REQUEST, changeNameRequest);
+  yield takeLatest(CHANGE_BIO_REQUEST, changeBioRequest);
 }

@@ -11,6 +11,14 @@ export const initialState = {
   signUpDone: false,
   signUpError: null,
 
+  changeNameLoading: false,
+  changeNameDone: false,
+  changeNameError: null,
+
+  changeBioLoading: false,
+  changeBioDone: false,
+  changeBioError: null,
+
   myInfo: null, //Info of me
   userInfo: null, //Info of other user
 };
@@ -43,6 +51,14 @@ export const SIGNUP_FAIL = "user/SIGNUP_FAIL";
 export const LOAD_INFO_REQUEST = "user/LOAD_INFO_REQUEST";
 export const LOAD_INFOP_SUCCESS = "user/LOAD_INFO_SUCESS";
 export const LOAD_INFO_FAIL = "user/LOAD_INFO_FAIL";
+
+export const CHANGE_NAME_REQUEST = "user/LOAD_NAME_REQUEST";
+export const CHANGE_NAME_SUCCESS = "user/LOAD_NAME_SUCESS";
+export const CHANGE_NAME_FAIL = "user/LOAD_NAME_FAIL";
+
+export const CHANGE_BIO_REQUEST = "user/LOAD_BIO_REQUEST";
+export const CHANGE_BIO_SUCCESS = "user/LOAD_BIO_SUCESS";
+export const CHANGE_BIO_FAIL = "user/LOAD_BIO_FAIL";
 
 export const logInAction = (data) => {
   return {
@@ -102,6 +118,38 @@ const userReducer = (state = initialState, action) => {
     case SIGNUP_FAIL:
       state.signUpLoading = false;
       state.signUpError = action.error;
+      break;
+
+    case CHANGE_NAME_REQUEST:
+      state.changeNameLoading = true;
+      state.changeNameDone = false;
+      state.changeNameError = null;
+      break;
+    case CHANGE_Name_SUCCESS:
+      state.changeNameLoading = false;
+      state.changeNameDone = true;
+
+      state.myInfo.nickname = action.data.nickname;
+      state.changeNameError = null;
+      break;
+    case CHANGE_NAME_FAIL:
+      state.changeNameLoading = false;
+      state.changeNameError = action.error;
+      break;
+    case CHANGE_BIO_REQUEST:
+      state.changeBioLoading = true;
+      state.changBioDone = false;
+      state.changeBioError = null;
+      break;
+    case CHANGE_BIO_SUCCESS:
+      state.changeBioDone = true;
+      state.changeBioLoading = false;
+      state.myInfo.Bio = action.data.nickname;
+      state.changeBioError = null;
+      break;
+    case CHANGE_BIO_FAIL:
+      state.changeBioLoading = false;
+      state.changeBioError = action.error;
       break;
 
     default:
