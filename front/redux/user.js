@@ -24,7 +24,7 @@ export const SIGNUP_SUCCESS = "user/SIGNUP_SUCESS";
 export const SIGNUP_FAIL = "user/SIGNUP_FAIL";
 
 export const LOAD_INFO_REQUEST = "user/LOAD_INFO_REQUEST";
-export const LOAD_INFOP_SUCCESS = "user/LOAD_INFO_SUCESS";
+export const LOAD_INFO_SUCCESS = "user/LOAD_INFO_SUCESS";
 export const LOAD_INFO_FAIL = "user/LOAD_INFO_FAIL";
 
 export const logInAction = (data) => {
@@ -72,7 +72,20 @@ const userReducer = (state = initialState, action) => {
       state.signUpLoading = false;
       state.signUpError = action.error;
       break;
-
+    case LOAD_INFO_REQUEST:
+      state.loadInfoLoading = true;
+      state.loadInfoDone = false;
+      state.loadInfoError = null;
+      break;
+    case LOAD_INFO_SUCCESS:
+      state.loadInfoLoading = false;
+      state.myInfo = action.data;
+      state.loadInfoError = null;
+      break;
+    case LOAD_INFO_FAIL:
+      state.loadInfoLoading = false;
+      state.loadInfoError = action.error;
+      break;
     default:
       break;
   }

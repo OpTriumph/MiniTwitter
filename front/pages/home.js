@@ -13,6 +13,8 @@ import { LOAD_TWEET_REQUEST } from "../redux/post.js";
 export default function Home() {
   const dispatch = useDispatch();
   const tweets = useSelector((state) => state.tweetReducer.tweets);
+  const myInfo = useSelector((state) => state.userReducer.myInfo);
+
   console.log(tweets);
 
   const [open, setOpen] = React.useState(false);
@@ -41,7 +43,7 @@ export default function Home() {
         <InfoBox />
       </Grid>
 
-      <TwitDialog handleClose={handleClose} open={open} />
+      <TwitDialog handleClose={handleClose} open={open} user={myInfo} />
     </Container>
   );
 }

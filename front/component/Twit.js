@@ -86,7 +86,7 @@ function Twit({ tweet }) {
   );
 }
 
-export default function TwitLine({ tweets }) {
+export default function TwitLine({ tweets = [] }) {
   const classes = useStyles();
 
   return (
@@ -98,8 +98,8 @@ export default function TwitLine({ tweets }) {
         <Twit key={tweet.id} tweet={tweet} />
       ))}
       <Paper variant="outlined" className={classes.paper}>
-        <Twit />
-        <Twit />
+        {/* <Twit />
+        <Twit /> */}
       </Paper>
     </Grid>
   );

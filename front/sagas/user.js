@@ -9,12 +9,12 @@ import {
   SIGNUP_FAIL,
   SIGNUP_REQUEST,
   LOAD_INFO_REQUEST,
-  LOAD_INFOP_SUCCESS,
+  LOAD_INFO_SUCCESS,
   LOAD_INFO_FAIL,
 } from "../redux/user";
 
 function loadInfo(data) {
-  return axios.get("http://localhost:3065/user");
+  return axios.get("http://localhost:3008/profile");
 }
 
 function* loadInfoRequest(action) {
@@ -23,7 +23,7 @@ function* loadInfoRequest(action) {
       withCredentials: true,
     });
     yield put({
-      type: LOAD_INFOP_SUCCESS,
+      type: LOAD_INFO_SUCCESS,
       data: res.data,
     });
   } catch (error) {

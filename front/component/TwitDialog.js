@@ -15,10 +15,11 @@ import { ReqDialog } from "dialog_requirement-twtpj";
 import { addTweetAction } from "../redux/post";
 import tweetReducer from "../redux/post";
 
-export default function TwitDialog({ open, handleClose }) {
+export default function TwitDialog({ open, handleClose, user }) {
   const dispatch = useDispatch();
   const [text, setText] = useState("");
   const [valid, setValid] = useState(false);
+  console.log(user);
 
   const AddTweetError = useSelector(
     (state) => state.tweetReducer.AddTweetError
@@ -26,7 +27,6 @@ export default function TwitDialog({ open, handleClose }) {
   const AddTweetAdding = useSelector(
     (state) => state.tweetReducer.AddTweetAdding
   );
-
   const AddTweetDone = useSelector((state) => state.tweetReducer.AddTweetDone);
 
   const tweetRequirement = [
