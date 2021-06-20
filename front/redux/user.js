@@ -14,6 +14,23 @@ export const initialState = {
   myInfo: null, //Info of me
   userInfo: null, //Info of other user
 };
+const dummyUser = (data) => ({
+  ...data,
+  nickname: "FakeUser",
+  id: 1,
+  Bio: "this is fake user",
+  Posts: [{ id: 1 }],
+  Followings: [
+    { nickname: "부기초" },
+    { nickname: "Chanho Lee" },
+    { nickname: "neue zeal" },
+  ],
+  Followers: [
+    { nickname: "부기초" },
+    { nickname: "Chanho Lee" },
+    { nickname: "neue zeal" },
+  ],
+});
 
 export const LOGIN_REQUEST = "user/LOGIN_REQUEST";
 export const LOGIN_SUCCESS = "user/LOGIN_SUCESS";
@@ -42,6 +59,20 @@ export const signUpAction = (data) => {
 
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
+    case LOAD_INFO_REQUEST:
+      state.loadInfoLoading = true;
+      state.loadInfoDone = false;
+      state.loadInfoError = null;
+      break;
+    case LOAD_INFOP_SUCCESS:
+      state.loadInfoLoading = false;
+      state.myInfo = dummyUser(action.data);
+      state.loadInfoError = null;
+      break;
+    case LOAD_INFO_FAIL:
+      state.loadInfoLoading = false;
+      state.loadInfoError = action.error;
+      break;
     case LOGIN_REQUEST:
       state.logInLoading = true;
       state.logInDone = false;

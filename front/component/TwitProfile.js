@@ -21,17 +21,19 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function MyInfo() {
+function MyInfo({ data }) {
+  const { Followers, Followings } = data || {};
+
   return (
     <Grid item container direction="row" spacing={4}>
       <Grid item>
         <Typography variant="body1" component="span">
-          <b>55</b> 팔로잉
+          <b>{Followings.length}</b> 팔로잉
         </Typography>
       </Grid>
       <Grid item>
         <Typography variant="body1" component="span">
-          <b>24</b> 팔로워
+          <b>{Followers.length}</b> 팔로워
         </Typography>
       </Grid>
       <Grid item>
@@ -43,7 +45,9 @@ function MyInfo() {
   );
 }
 
-export default function TwitProfile() {
+export default function TwitProfile({ data }) {
+  const { id, nickname, Bio } = data || {};
+
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const handleClickOpen = () => {
@@ -59,7 +63,7 @@ export default function TwitProfile() {
       <Grid item xs>
         <Paper variant="outlined" className={classes.paper}>
           <Typography>
-            <b>유저 이름2</b>
+            <b>{console.log(data)}</b>
           </Typography>
         </Paper>
 
@@ -76,10 +80,10 @@ export default function TwitProfile() {
             <Grid item container direction="row">
               <Grid item xs>
                 <Typography variant="h4">
-                  <b>유저 이름2</b>
+                  <b>{nickname}</b>
                 </Typography>
                 <Typography variant="h6" style={{ color: "#afafaf" }}>
-                  @아이디2
+                  @{id}
                 </Typography>
               </Grid>
 
@@ -106,12 +110,10 @@ export default function TwitProfile() {
             </Grid>
 
             <Grid item xs>
-              <Typography variant="body1">
-                미니트위터 자기소개란. Test
-              </Typography>
+              <Typography variant="body1">{Bio}</Typography>
             </Grid>
 
-            <MyInfo />
+            <MyInfo data={data} />
           </Grid>
         </Paper>
       </Grid>
