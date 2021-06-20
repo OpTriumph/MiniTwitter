@@ -9,14 +9,26 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Grid from "@material-ui/core/Grid";
 import React, { useCallback, useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { ADD_TWEET_REQUEST } from "../redux/post";
 import { ReqDialog } from "dialog_requirement-twtpj";
+import { addTweetAction } from "../redux/post";
+import tweetReducer from "../redux/post";
 
 export default function TwitDialog({ open, handleClose }) {
   const dispatch = useDispatch();
   const [text, setText] = useState("");
   const [valid, setValid] = useState(false);
+
+  const AddTweetError = useSelector(
+    (state) => state.tweetReducer.AddTweetError
+  );
+  const AddTweetAdding = useSelector(
+    (state) => state.tweetReducer.AddTweetAdding
+  );
+
+  const AddTweetDone = useSelector((state) => state.tweetReducer.AddTweetDone);
+
   const tweetRequirement = [
     {
       text: "Must be at least 1 characters",
@@ -27,17 +39,26 @@ export default function TwitDialog({ open, handleClose }) {
     setText(e.target.value);
     console.log(text);
   };
-  const handleTweet = useCallback(() => {
-    if (!text) {
-      return alert("게시글을 작성하세요.");
+  useEffect(() => {
+    if (AddTweetError) {
+      alert(AddTweetError.data);
     }
-    return dispatch({
-      type: ADD_TWEET_REQUEST,
-      data: {
-        content: text,
-      },
-    });
-  }, [text]);
+    if (AddTweetDone) {
+      setText(""), handleClose;
+    }
+  }, [AddTweetError, AddTweetDone]);
+
+  const handleTweet = (event) => {
+    if (event.type !== "click") {
+      return;
+    }
+    if (text === "") {
+      return;
+    }
+    dispatch(addTweetAction({ text }));
+    handleClose();
+    setText("");
+  };
 
   return (
     <Dialog
@@ -85,6 +106,7 @@ export default function TwitDialog({ open, handleClose }) {
           variant="contained"
           size="large"
           disabled={!valid || !text}
+          loading={AddTweetAdding}
         >
           트윗
         </Button>

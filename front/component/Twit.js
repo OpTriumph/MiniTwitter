@@ -15,6 +15,9 @@ import CardHeader from "@material-ui/core/CardHeader";
 import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
 
+import { useDispatch, useSelector } from "react-redux";
+// import * from "../redux/post";
+
 const useStyles = makeStyles((theme) => ({
   paper: {
     padding: theme.spacing(2),
@@ -22,7 +25,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Twit() {
+function Twit({ tweet }) {
+  const dispatch = useDispatch();
+  const { id, title, userId, likes } = tweet || {};
+
   const classes = useStyles();
   return (
     <Card>
@@ -45,13 +51,13 @@ function Twit() {
         subheader={
           <>
             <Typhography variant="body2" component="span">
-              @TempUser1 · May 25
+              @{id}· May 25
             </Typhography>
           </>
         }
       />
       <CardContent>
-        <Typhography variant="body1">무슨 일이 일어나고 있나요?</Typhography>
+        <Typhography variant="body1">{title}</Typhography>
       </CardContent>
 
       <CardActions>
@@ -80,14 +86,17 @@ function Twit() {
   );
 }
 
-export default function TwitLine() {
+export default function TwitLine({ tweets }) {
   const classes = useStyles();
+
   return (
     <Grid item xs>
       <Paper variant="outlined" className={classes.paper}>
         <b>최신 트윗</b>
       </Paper>
-      <Twit />
+      {tweets.map((tweet) => (
+        <Twit key={tweet.id} tweet={tweet} />
+      ))}
       <Paper variant="outlined" className={classes.paper}>
         <Twit />
         <Twit />
