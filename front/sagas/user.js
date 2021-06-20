@@ -11,6 +11,9 @@ import {
   LOGOUT_SUCCESS,
   LOGOUT_FAIL,
   LOGOUT_REQUEST,
+  LOAD_INFO_SUCCESS,
+  LOAD_INFO_FAIL,
+  LOAD_INFO_REQUEST,
 } from "../redux/user";
 
 function loginPost(data) {
@@ -59,8 +62,13 @@ function* signupRequest(action) {
     });
   }
 }
+
 function logoutPost() {
-  return axios.post("http://localhost:3065/user/logout");
+  return axios.post(
+    "http://localhost:3065/user/logout",
+    {},
+    { withCredentials: true }
+  );
 }
 function* logoutRequest(action) {
   try {
@@ -75,8 +83,28 @@ function* logoutRequest(action) {
     });
   }
 }
+
+function loadInfo(data) {
+  return axios.get("http://localhost:3065/user", { withCredentials: true });
+}
+
+function* loadInfoRequest(action) {
+  try {
+    const res = yield call(loadInfo, action.data, { withCredentials: true });
+    yield put({
+      type: LOAD_INFO_SUCCESS,
+      data: res.data,
+    });
+  } catch (error) {
+    yield put({
+      type: LOAD_INFO_FAIL,
+      error: error.response.data,
+    });
+  }
+}
 export default function* userSaga() {
   yield takeLatest(LOGIN_REQUEST, loginRequest);
   yield takeLatest(SIGNUP_REQUEST, signupRequest);
   yield takeLatest(LOGOUT_REQUEST, logoutRequest);
+  yield takeLatest(LOAD_INFO_REQUEST, loadInfoRequest);
 }
