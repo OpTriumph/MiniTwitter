@@ -114,7 +114,7 @@ export default function TwitDialog({ open, handleClose }) {
           color="primary"
           variant="contained"
           size="large"
-          disabled={!valid || !name || !Bio}
+          disabled={!valid || (!name && !Bio)}
         >
           저장
         </Button>
