@@ -9,16 +9,14 @@ export const initialState = {
 };
 
 export const ADD_TWEET_REQUEST = "ADD_TWEET_REQUEST";
-export const ADD_TWEET_SUCCESS = "ADD_TWEET_SUCCESS ";
-export const ADD_TWEET_FAIL = "ADD_TWEET_FAIL ";
+export const ADD_TWEET_SUCCESS = "ADD_TWEET_SUCCESS";
+export const ADD_TWEET_FAIL = "ADD_TWEET_FAIL";
+export const ADD_COMMENT_REQUEST = "ADD_COMMENT_REQUEST";
+export const ADD_COMMENT_SUCCESS = "ADD_COMMENT_SUCCESS";
+export const ADD_COMMENT_FAIL = "ADD_COMMENT_FAIL";
 export const LOAD_TWEET_REQUEST = "LOAD_TWEET_REQUEST";
 export const LOAD_TWEET_SUCCESS = "LOAD_TWEET_SUCCESS";
 export const LOAD_TWEET_FAIL = "LOAD_TWEET_FAIL";
-
-export const addtweet = (data) => ({
-  type: ADD_TWEET_REQUEST,
-  data,
-});
 
 const tweetReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -31,6 +29,7 @@ const tweetReducer = (state = initialState, action) => {
       state.AddTweetAdding = false;
       state.AddTweetDone = true;
       state.tweets.unshift(action.data);
+      console.log(state.tweets);
       break;
     case ADD_TWEET_FAIL:
       state.AddTweetAdding = false;
