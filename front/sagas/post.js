@@ -1,4 +1,4 @@
-import { all, put, call, takeLatest, take } from "redux-saga/effects";
+import { put, call, takeLatest } from "redux-saga/effects";
 import axios from "axios";
 
 import {
@@ -57,18 +57,17 @@ function* handleAddComment(action) {
   }
 }
 
+function loadTweet() {
+  return axios.get("http://localhost:3065/posts", { withCredentials: true });
+}
 function* handleloadTweets() {
   try {
-    const result = yield call(() =>
-      axios.get("https://jsonplaceholder.typicode.com/posts")
-    );
-
+    const res = yield call(loadTweet);
     yield put({
       type: LOAD_TWEET_SUCCESS,
-      data: result.data,
+      data: res.data,
     });
   } catch (err) {
-    console.error(err);
     yield put({
       type: LOAD_TWEET_FAIL,
       error: err.response,
@@ -79,4 +78,5 @@ function* handleloadTweets() {
 export default function* tweetSaga() {
   yield takeLatest(ADD_TWEET_REQUEST, handleAddTweet);
   yield takeLatest(ADD_COMMENT_REQUEST, handleAddComment);
+  yield takeLatest(LOAD_TWEET_REQUEST, handleloadTweets);
 }

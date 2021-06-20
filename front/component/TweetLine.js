@@ -14,7 +14,7 @@ import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
-
+import { useSelector } from "react-redux";
 const useStyles = makeStyles((theme) => ({
   paper: {
     padding: theme.spacing(2),
@@ -22,8 +22,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Twit() {
-  const classes = useStyles();
+function Tweet({ tweet }) {
+  console.log(tweet);
   return (
     <Card>
       <CardHeader
@@ -39,19 +39,19 @@ function Twit() {
         }
         title={
           <Typhography variant="h6">
-            <b>임시 유저1</b>
+            <b>{tweet.User.nickname}</b>
           </Typhography>
         }
         subheader={
           <>
             <Typhography variant="body2" component="span">
-              @TempUser1 · May 25
+              {tweet.createdAt.slice(0, 10)}
             </Typhography>
           </>
         }
       />
       <CardContent>
-        <Typhography variant="body1">무슨 일이 일어나고 있나요?</Typhography>
+        <Typhography variant="body1">{tweet.content}</Typhography>
       </CardContent>
 
       <CardActions>
@@ -59,21 +59,21 @@ function Twit() {
           <ChatBubbleOutlineIcon />
         </IconButton>
         <Typography component="span" variant="body2">
-          0
+          {tweet.Comments.length}
         </Typography>
 
         <IconButton aria-label="retweet" component="span">
           <RepeatIcon />
         </IconButton>
         <Typography component="span" variant="body2">
-          14
+          0
         </Typography>
 
         <IconButton aria-label="like" component="span">
           <FavoriteBorderIcon />
         </IconButton>
         <Typography component="span" variant="body2">
-          33
+          {tweet.Likers.length}
         </Typography>
       </CardActions>
     </Card>
@@ -82,16 +82,15 @@ function Twit() {
 
 export default function TwitLine() {
   const classes = useStyles();
+  const tweets = useSelector((state) => state.tweetReducer.tweets);
   return (
     <Grid item xs>
       <Paper variant="outlined" className={classes.paper}>
         <b>최신 트윗</b>
       </Paper>
-      <Twit />
-      <Paper variant="outlined" className={classes.paper}>
-        <Twit />
-        <Twit />
-      </Paper>
+      {tweets.map((tweet) => (
+        <Tweet tweet={tweet} />
+      ))}
     </Grid>
   );
 }

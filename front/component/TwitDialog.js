@@ -16,7 +16,7 @@ import { ADD_TWEET_REQUEST } from "../redux/post";
 export default function TwitDialog({ open, handleClose }) {
   const dispatch = useDispatch();
   const [text, setText] = useState("");
-  const [valid, setValid] = useState(false);
+  //const [valid, setValid] = useState(false);
   /*const tweetRequirement = [
     {
       text: "Must be at least 1 characters",
@@ -25,7 +25,6 @@ export default function TwitDialog({ open, handleClose }) {
   ];*/
   const onChangeText = (e) => {
     setText(e.target.value);
-    console.log(text);
   };
   const handleTweet = useCallback(() => {
     if (!text) {
@@ -85,7 +84,7 @@ export default function TwitDialog({ open, handleClose }) {
           color="primary"
           variant="contained"
           size="large"
-          disabled={!valid || !text}
+          disabled={!text}
         >
           트윗
         </Button>
