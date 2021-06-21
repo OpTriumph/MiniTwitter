@@ -5,6 +5,9 @@
 - 기본적 마크업 페이지 제작
 - Kakao Login
 - Naver Login
+-
+![](https://media.giphy.com/media/QduFxOexewLbBj58zZ/giphy.gif)
+
 
 
 - local 회원가입
