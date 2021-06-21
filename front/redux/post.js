@@ -8,7 +8,7 @@ export const initialState = {
   DeleteTweetError: null,
 
   tweets: [],
-
+  // post: {},
   LoadTweetLoading: false,
   LoadTweetDone: false,
   LoadTweetError: null,
@@ -51,6 +51,8 @@ export const UNLIKE_TWEET_SUCCESS = "post/UNLIKE_TWEET_SUCCESS";
 export const UNLIKE_TWEET_FAIL = "post/UNLIKE_TWEET_FAIL";
 
 const tweetReducer = (state = initialState, action) => {
+  // let post = tweets.find((v) => v.id === action.data.id);
+  // let post = state.tweets.find((v) => v.id === action.data.id);
   switch (action.type) {
     case ADD_TWEET_REQUEST:
       return {
@@ -172,8 +174,18 @@ const tweetReducer = (state = initialState, action) => {
       };
 
     case ADD_COMMENT_SUCCESS:
+      // let post = state.tweets.find((v) => v.id === action.data.id);
+      // console.log("!!!!!!!!!!result", result.data);
+
       return {
         ...state,
+        // tweets: [action.data].concat(state.tweets),
+        // tweets: state.tweets.filter((info) => info.id !== action.data),
+
+        post: state.tweets.find((v) => v.id === action.data.id),
+        post: [action.data].concat(state.post),
+        // tweet
+        // tweets: state.tweets
         AddcommentLoAdding: false,
         AddcommentDone: true,
       };

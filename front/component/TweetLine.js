@@ -16,6 +16,8 @@ import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
 import { useDispatch, useSelector } from "react-redux";
 import { DELETE_TWEET_REQUEST } from "../redux/post";
+import TwitDialog from "../component/TwitDialog.js";
+import CommentDialog from "../component/CommentDialog";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -25,12 +27,27 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Tweet({ tweet }) {
+  const [id, setId] = React.useState("");
+
+  const handleClickOpen = () => {
+    setId(tweet.id), setOpen(true);
+  };
+
+  const handleClose = () => {
+    setId("");
+    setOpen(false);
+  };
+  const [open, setOpen] = React.useState(false);
+
   const dispatch = useDispatch();
   const DeleteTweetError = useSelector(
     (state) => state.tweetReducer.DeleteTweetError
   );
   const Tweetwritter = useSelector((state) => state.userReducer.myInfo);
 
+  const getId = () => {
+    setId(tweet.id);
+  };
   useEffect(() => {
     if (DeleteTweetError) {
       if (DeleteTweetError.statue === 403) alert("이미 삭제된 트윗입니다.");
@@ -78,13 +95,20 @@ function Tweet({ tweet }) {
       <CardContent>
         <Typhography variant="body1">{tweet.content}</Typhography>
       </CardContent>
-
       <CardActions>
-        <IconButton aria-label="mention" component="span">
+        <IconButton
+          aria-label="mention"
+          component="span"
+          // onClick={setId(tweet.id)}
+          onClick={handleClickOpen}
+
+          // tweet={tweet}
+        >
           <ChatBubbleOutlineIcon />
         </IconButton>
         <Typography component="span" variant="body2">
           {tweet.Comments.length}
+          <CommentDialog open={open} handleClose={handleClose} ID={id} />
         </Typography>
 
         <IconButton aria-label="retweet" component="span">
@@ -100,7 +124,7 @@ function Tweet({ tweet }) {
         <Typography component="span" variant="body2">
           {tweet.Likers.length}
         </Typography>
-      </CardActions>
+      </CardActions>{" "}
     </Card>
   );
 }

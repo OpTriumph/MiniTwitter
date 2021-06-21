@@ -45,7 +45,7 @@ function* handleAddTweet(action) {
 }
 
 function addComment(data) {
-  return axios.post("http://localhost:3065/post/comment", data, {
+  return axios.post(`http://localhost:3065/${postid}/comment`, data, {
     withCredentials: true,
   });
 }
@@ -61,7 +61,7 @@ function* handleAddComment(action) {
     console.error(err);
     yield put({
       type: ADD_COMMENT_FAIL,
-      error: err.response.data,
+      error: err.response,
     });
   }
 }
