@@ -8,35 +8,30 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Grid from "@material-ui/core/Grid";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { ADD_TWEET_REQUEST } from "../redux/post";
-//import { ReqDialog } from "dialog_requirement-twtpj";
 
 export default function TwitDialog({ open, handleClose }) {
   const dispatch = useDispatch();
   const [text, setText] = useState("");
-  //const [valid, setValid] = useState(false);
-  /*const tweetRequirement = [
-    {
-      text: "Must be at least 1 characters",
-      validator: (val) => val.length >= 1,
-    },
-  ];*/
+
   const onChangeText = (e) => {
     setText(e.target.value);
   };
-  const handleTweet = useCallback(() => {
+  const handleTweet = () => {
     if (!text) {
-      return alert("게시글을 작성하세요.");
+      alert("게시글을 작성하세요.");
+    } else {
+      dispatch({
+        type: ADD_TWEET_REQUEST,
+        data: {
+          content: text,
+        },
+      });
+      handleClose();
     }
-    return dispatch({
-      type: ADD_TWEET_REQUEST,
-      data: {
-        content: text,
-      },
-    });
-  }, [text]);
+  };
 
   return (
     <Dialog
@@ -58,12 +53,6 @@ export default function TwitDialog({ open, handleClose }) {
           </Grid>
 
           <Grid item xs>
-            {/*
-            <ReqDialog
-              value={text}
-              Requirements={tweetRequirement}
-              onValidChange={(isValid) => setValid(isValid)}
-          />*/}
             <TextField
               id="write-new-twit"
               autoFocus
