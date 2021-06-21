@@ -3,16 +3,34 @@
 ## 현재까지 구현된 기능
 
 - 기본적 마크업 페이지 제작
-- 로그인 화면으로 접속하여 로그인 버튼을 누르면 home으로 접속
-- 왼쪽 메뉴의 home, profile을 클릭하면 각각의 페이지로 이동
-- 트윗 버튼을 누르면 다이얼로그 창이 나와 트윗 입력 가능
+- Kakao Login
+- Naver Login
 - local 회원가입
 - local 로그인
-
+- 로그인 화면으로 접속하여 로그인 버튼을 누르면 home으로 접속
+-
+- 왼쪽 메뉴의 home, profile을 클릭하면 각각의 페이지로 이동
+- 트윗 버튼을 누르면 다이얼로그 창이 나와 트윗 입력 가능
+- 새로운 트윗은 home 화면 상단에 출력
+- 개인의 트윗 삭제 가능
+- 트윗을 좋아요, retweet을 누르면 화면에 표시
+- Comment 버튼을 누르면 comment창 나와 입력 가능
 
 ## 실행
  
 ```
+### 백엔드
+#MySQL DB를 사용함으로 로콜DB 실행하면 백엔드와 연결가능#
+#MYSQL 실행후 /back/config/config.js의 MYSQL password 를 로컬MYSQL password으로 변경
+
+1. cd back
+2. npm i
+3. npm run dev
+
+### 프런틓엔드
+
+cd front
+npm i
 yarn dev
 ```
 
@@ -37,7 +55,7 @@ yarn dev
 |      +-- index.js              (로그인 페이지. 처음 이 페이지가 열림)
 |      +-- profile.js            (프로필 페이지)
 |      +-- signup.js             (회원가입 페이지. 로그인 페이지에서 접근 가능)
-|
+
 +-- public                                      (페이지에서 사용할 이미지파일들)
 |      +-- btnG_완성형.png                     (네이버 로그인 이미지)
 |      +-- kakao_login_medium_narrow.png       (카카오 로그인 이미지)
@@ -46,9 +64,11 @@ yarn dev
 +-- redux
 |      +-- store.js                     (redux, redux-saga store)
 |      +-- user.js                      (login, signup, logout의 reducer)
-|
+|      +-- post.js                      (loadTweet, addTweet, deleteTweet, addComment, like/unlikeTweet의 reducer)
+
 +-- sagas
 |      +-- user.js                     (redux/user에서 사용되는 saga)
+|      +-- post.js                     (redux/post에서 사용되는 saga)
 
 ```
 
@@ -60,3 +80,7 @@ yarn dev
 - material-ui signin template: https://github.com/mui-org/material-ui/tree/master/docs/src/pages/getting-started/templates/sign-in
 - Naver api(로그인 이미지):https://developers.naver.com/docs/login/bi/bi.md
 - Kakao api(로그인 이미지): https://developers.kakao.com/tool/resource/login
+- redux-saga: https://redux-saga.js.org/docs/introduction/BeginnerTutorial/
+- redux: https://redux.js.org/introduction/getting-started
+- storybook: https://storybook.js.org/tutorials/
+- rollup: https://rollupjs.org/guide/en/#tutorial
