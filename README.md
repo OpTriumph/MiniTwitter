@@ -37,7 +37,7 @@ yarn dev
 자동으로 페이지가 열리지 않으므로 주소창에 http://localhost:3000/ 을 입력하여 확인
 
 ## 데모 영상
-
+https://youtu.be/cCbwufvUfVc
 
 ## 위키
 
