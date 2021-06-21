@@ -5,16 +5,56 @@
 - 기본적 마크업 페이지 제작
 - Kakao Login
 - Naver Login
+
+
 - local 회원가입
+- 
+![](https://media.giphy.com/media/W9RYlwpHHiLxDoCSaC/giphy.gif)
+-
+-
+-
 - local 로그인
 - 로그인 화면으로 접속하여 로그인 버튼을 누르면 home으로 접속
+
+![](https://media.giphy.com/media/lURbSzcGqWpOwlVdp9/giphy.gif)
 -
+-
+-
+-
+- profile 페이지에서 logout 가능
 - 왼쪽 메뉴의 home, profile을 클릭하면 각각의 페이지로 이동
+- 
+![](https://media.giphy.com/media/C5SZmxx3rmUx3Hc7qF/giphy.gif)
+-
+-
+-
+-
+- profile 페이지에서 tweet 가능
+- 
+
+![](https://media.giphy.com/media/gmYWkGinUGG6cUc9HG/giphy.gif)
+
+
 - 트윗 버튼을 누르면 다이얼로그 창이 나와 트윗 입력 가능
 - 새로운 트윗은 home 화면 상단에 출력
+-
+![](https://media.giphy.com/media/uViekL1QugDdq3h5gb/giphy.gif)
+-
+-
+-
+-
 - 개인의 트윗 삭제 가능
+- 
+![](https://media.giphy.com/media/aBdouascNT725DpT7O/giphy.gif)
+-
+-
+-
+-
+-
 - 트윗을 좋아요, retweet을 누르면 화면에 표시
 - Comment 버튼을 누르면 comment창 나와 입력 가능
+- 
+
 
 ## 실행
  
