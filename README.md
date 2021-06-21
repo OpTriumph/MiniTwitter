@@ -1,4 +1,4 @@
-# 2021 COSE490 Mini Twitter
+# 2021 COSE490 7조 Mini Twitter
 
 ## 구현된 기능
 
