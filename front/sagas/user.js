@@ -14,6 +14,9 @@ import {
   LOAD_INFO_SUCCESS,
   LOAD_INFO_FAIL,
   LOAD_INFO_REQUEST,
+  CHANGE_NAME_REQUEST,
+  CHANGE_NAME_SUCCESS,
+  CHANGE_NAME_FAIL,
 } from "../redux/user";
 
 function loginPost(data) {
@@ -102,9 +105,36 @@ function* loadInfoRequest(action) {
     });
   }
 }
+
+// function changeName(data) {
+//   return axios.patch("http://localhost:3065/user/nickname", {
+//     withCredentials: true,
+//     nickname: data,
+//   });
+// }
+
+// function* changeNameRequest(action) {
+//   try {
+//     const res = yield call(changeName, action.payload, {
+//       withCredentials: true,
+//     });
+//     yield put({
+//       type: CHANGE_NICKNAME_SUCCESS,
+//       data: res.data,
+//     });
+//   } catch (err) {
+//     console.error(err);
+//     yield put({
+//       type: CHANGE_NICKNAME_FAILURE,
+//       error: err.response,
+//     });
+//   }
+// }
+
 export default function* userSaga() {
   yield takeLatest(LOGIN_REQUEST, loginRequest);
   yield takeLatest(SIGNUP_REQUEST, signupRequest);
   yield takeLatest(LOGOUT_REQUEST, logoutRequest);
   yield takeLatest(LOAD_INFO_REQUEST, loadInfoRequest);
+  // yield takeLatest(CHANGE_NAME_REQUEST, changeNameRequest);
 }
