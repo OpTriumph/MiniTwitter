@@ -13,7 +13,6 @@ module.exports = () => {
       },
       async (accessToken, refreshToken, profile, done) => {
         try {
-          console.log(profile);
           const user = await User.findOne({
             where: { email: profile.emails[0].value, provider: "naver" },
           });

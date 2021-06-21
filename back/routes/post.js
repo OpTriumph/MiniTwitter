@@ -3,14 +3,15 @@ const { Post, User, Comment } = require("../models");
 
 const router = express.Router();
 
-router.post("/", async (req, res) => {
+router.post("/", async (req, res, next) => {
   try {
     const post = await Post.create({
       content: req.body.content,
-      //로그인 된 상황이면 라우터 접근 시 deserialize가 호출되며 req.user에 user id가 담겨있다.
+      //로그인 된 상황이면(세션이 존재할 경우) 라우터 접근 시 deserialize가 호출되며 req.user에 user id가 담겨있다.
+      //UserId 컬럼은 belongsTo 관계에 의해 생성된 칼럼이다.(belongsToMany에서도 생성된다.)
       UserId: req.user.id,
     });
-    // DB에 포스트 추가 후 작성자, 코멘트 정보, 좋아요 누른 사람의 정보를 담아서 전송한다.
+    // DB에 포스트 추가 후 작성자, 코멘트 정보 (+코멘트 작성자의 id와 nickname), 좋아요 누른 사람의 정보를 담아서 전송한다.
     const fullPost = await Post.findOne({
       where: { id: post.id },
       include: [
@@ -45,12 +46,24 @@ router.post("/comment", async (req, res, next) => {
     const comment = await Comment.create({
       content: req.body.content,
       PostId: req.body.postId,
+      UserId: req.user.id,
     });
+    const fullComment = await Comment.findOne({
+      where: { id: comment.id },
+      include: [
+        {
+          model: User,
+          attributes: ["id", "nickname"],
+        },
+      ],
+    });
+    res.status(201).json(fullComment);
   } catch {
     console.error(error);
     next(error);
   }
 });
+
 router.get("/mypost", async (req, res) => {
   try {
     if (!req.isAuthenticated()) res.status(401).send("로그인이 필요합니다.");

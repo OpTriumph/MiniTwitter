@@ -10,9 +10,25 @@ import DialogContent from "@material-ui/core/DialogContent";
 import Typography from "@material-ui/core/Typography";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Grid from "@material-ui/core/Grid";
+//import { ReqDialog } from "dialog_requirement-twtpj";
 
 export default function TwitDialog({ open, handleClose }) {
   const [Bio, setBio] = React.useState("미니트위터 자기소개란. Test");
+  const [valid, setValid] = React.useState(false);
+
+  const nameRequirement = [
+    {
+      text: "Must be at least 3 characters",
+      validator: (val) => val.length >= 3,
+    },
+  ];
+
+  const BioRequirement = [
+    {
+      text: "Must be at least 10 characters",
+      validator: (val) => val.length >= 10,
+    },
+  ];
   const handleBioChange = (event) => {
     setBio(event.target.value);
   };
@@ -59,6 +75,12 @@ export default function TwitDialog({ open, handleClose }) {
             </IconButton>
           </Grid>
           <Grid item>
+            {/*
+            <ReqDialog
+              value={name}
+              Requirements={nameRequirement}
+              onValidChange={(isValid) => setValid(isValid)}
+          />*/}
             <TextField
               id="change-my-name"
               variant="outlined"
@@ -69,6 +91,12 @@ export default function TwitDialog({ open, handleClose }) {
             />
           </Grid>
           <Grid item>
+            {/*
+            <ReqDialog
+              value={Bio}
+              Requirements={BioRequirement}
+              onValidChange={(isValid) => setValid(isValid)}
+          />*/}
             <TextField
               id="change-my-bio"
               multiline
@@ -88,6 +116,7 @@ export default function TwitDialog({ open, handleClose }) {
           color="primary"
           variant="contained"
           size="large"
+          disabled={!valid || (!name && !Bio)}
         >
           저장
         </Button>

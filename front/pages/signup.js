@@ -60,6 +60,7 @@ export default function SignInSide() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
+
           <TextField
             variant="outlined"
             margin="normal"
@@ -71,6 +72,7 @@ export default function SignInSide() {
             value={nickname}
             onChange={(e) => setNickname(e.target.value)}
           />
+
           <TextField
             variant="outlined"
             margin="normal"
@@ -97,7 +99,6 @@ export default function SignInSide() {
             value={check}
             onChange={(e) => setCheck(e.target.value)}
           />
-
           <Button
             fullWidth
             variant="contained"
