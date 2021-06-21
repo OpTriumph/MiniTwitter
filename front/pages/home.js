@@ -12,6 +12,8 @@ import { LOAD_TWEET_REQUEST } from "../redux/post.js";
 export default function Home() {
   const dispatch = useDispatch();
   const myInfo = useSelector((state) => state.userReducer.myInfo);
+  const tweets = useSelector((state) => state.tweetReducer.tweets);
+
   const [open, setOpen] = React.useState(false);
 
   useEffect(() => {
@@ -36,7 +38,7 @@ export default function Home() {
       <Grid container spacing={2}>
         <TwitMenu handleClickOpen={handleClickOpen} />
 
-        <TweetLine />
+        <TweetLine tweets={tweets} />
         <InfoBox />
       </Grid>
 
