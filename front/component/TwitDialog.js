@@ -30,6 +30,7 @@ export default function TwitDialog({ open, handleClose }) {
         },
       });
       handleClose();
+      setText("");
     }
   };
 

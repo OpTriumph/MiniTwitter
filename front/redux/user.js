@@ -72,6 +72,7 @@ const userReducer = (state = initialState, action) => {
         logInDone: true,
         logInLoading: false,
         logInError: null,
+        myInfo: action.data,
       };
 
     case LOGIN_FAIL:
