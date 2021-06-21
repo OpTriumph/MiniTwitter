@@ -8,6 +8,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import ProfileDialog from "../component/ProfileDialog";
 import { useDispatch, useSelector } from "react-redux";
 import { LOGOUT_REQUEST } from "../redux/user";
+
 import Router from "next/router";
 
 const useStyles = makeStyles((theme) => ({
@@ -24,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function MyInfo() {
+function MyInfo({ user }) {
   const dispatch = useDispatch();
   const logoutDone = useSelector((state) => state.userReducer.logOutDone);
   useEffect(() => {
@@ -48,7 +49,7 @@ function MyInfo() {
         </Grid>
         <Grid item>
           <Typography variant="body1" component="span">
-            <b> 2021년 5월</b> 가입
+            <b> {user.createdAt.slice(0, 10)}</b> 가입
           </Typography>
         </Grid>
       </Grid>
@@ -68,9 +69,10 @@ function MyInfo() {
   );
 }
 
-export default function TwitProfile() {
+export default function TwitProfile({ user }) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
+  console.log("this", user);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -85,7 +87,7 @@ export default function TwitProfile() {
       <Grid item xs>
         <Paper variant="outlined" className={classes.paper}>
           <Typography>
-            <b>유저 이름2</b>
+            <b>{user.nickname}</b>
           </Typography>
         </Paper>
 
@@ -102,10 +104,10 @@ export default function TwitProfile() {
             <Grid item container direction="row">
               <Grid item xs>
                 <Typography variant="h4">
-                  <b>유저 이름2</b>
+                  <b>{user.nickname}</b>
                 </Typography>
                 <Typography variant="h6" style={{ color: "#afafaf" }}>
-                  @아이디2
+                  @{user.id}
                 </Typography>
               </Grid>
 
@@ -137,7 +139,7 @@ export default function TwitProfile() {
               </Typography>
             </Grid>
 
-            <MyInfo />
+            <MyInfo user={user} />
           </Grid>
         </Paper>
       </Grid>

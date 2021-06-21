@@ -15,6 +15,10 @@ export const initialState = {
   signUpDone: false,
   signUpError: null,
 
+  changeNameLoading: false,
+  changeNameDone: false,
+  changeNameError: null,
+
   myInfo: null, //Info of me
   userInfo: null, //Info of other user
 };
@@ -34,6 +38,10 @@ export const SIGNUP_FAIL = "user/SIGNUP_FAIL";
 export const LOAD_INFO_REQUEST = "user/LOAD_INFO_REQUEST";
 export const LOAD_INFO_SUCCESS = "user/LOAD_INFO_SUCESS";
 export const LOAD_INFO_FAIL = "user/LOAD_INFO_FAIL";
+
+export const CHANGE_NAME_REQUEST = "user/CHANGE_NAME_REQUEST";
+export const CHANGE_NAME_SUCCESS = "user/CHANGE_NAME_SUCCESS";
+export const CHANGE_NAME_FAIL = "user/CHANGE_NAME_FAIL";
 
 export const logInAction = (data) => {
   return {
@@ -141,6 +149,29 @@ const userReducer = (state = initialState, action) => {
         loadInfoLoading: false,
         loadInfoError: action.error,
       };
+
+    case CHANGE_NAME_REQUEST:
+      return {
+        ...state,
+        changeNameLoading: true,
+        changeNameDone: false,
+        changeNameError: null,
+      };
+
+    case CHANGE_NAME_SUCCESS:
+      return {
+        ...state,
+        changeNameLoading: false,
+        changeNameDone: true,
+        myInfo: action.data,
+      };
+    case CHANGE_NAME_FAIL:
+      return {
+        ...state,
+        changeNameLoading: false,
+        changeNameError: action.error,
+      };
+
     default:
       return state;
   }
