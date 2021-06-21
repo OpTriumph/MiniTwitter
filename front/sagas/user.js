@@ -14,9 +14,11 @@ import {
   LOAD_INFO_SUCCESS,
   LOAD_INFO_FAIL,
   LOAD_INFO_REQUEST,
+  /*not implemented
   CHANGE_NAME_REQUEST,
   CHANGE_NAME_SUCCESS,
   CHANGE_NAME_FAIL,
+  */
 } from "../redux/user";
 
 function loginPost(data) {

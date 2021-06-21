@@ -24,6 +24,12 @@ export const initialState = {
   AddcommentLoading: false,
   AddcommentDone: false,
   AddcommentError: null,
+
+  LoadmyTweetLoading: false,
+  LoadmyTweetDone: false,
+  LoadmyTweetError: null,
+
+  mytweets: [],
 };
 
 export const ADD_TWEET_REQUEST = "post/ADD_TWEET_REQUEST";
@@ -50,6 +56,10 @@ export const UNLIKE_TWEET_REQUEST = "post/UNLIKE_TWEET_REQUEST";
 export const UNLIKE_TWEET_SUCCESS = "post/UNLIKE_TWEET_SUCCESS";
 export const UNLIKE_TWEET_FAIL = "post/UNLIKE_TWEET_FAIL";
 
+export const LOAD_MY_TWEET_REQUEST = "post/LOAD_MY_TWEET_REQUEST";
+export const LOAD_MY_TWEET_SUCCESS = "post/LOAD_MY_TWEET_SUCCESS";
+export const LOAD_MY_TWEET_FAIL = "post/LOAD_MY_TWEET_FAIL";
+
 const tweetReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_TWEET_REQUEST:
@@ -66,6 +76,7 @@ const tweetReducer = (state = initialState, action) => {
         AddTweetLoadding: false,
         AddTweetDone: true,
         tweets: [action.data].concat(state.tweets),
+        mytweets: [action.data].concat(state.tweets),
       };
 
     case ADD_TWEET_FAIL:
@@ -111,6 +122,7 @@ const tweetReducer = (state = initialState, action) => {
         DeleteTweetLoading: false,
         DeleteTweetDone: true,
         tweets: state.tweets.filter((info) => info.id !== action.data),
+        mytweets: state.mytweets.filter((info) => info.id !== action.data),
       };
     case DELETE_TWEET_FAIL:
       return {
@@ -120,6 +132,7 @@ const tweetReducer = (state = initialState, action) => {
         DeleteTweetDone: false,
       };
 
+    /* not implemented 
     case LIKE_TWEET_REQUEST:
       return {
         ...state,
@@ -162,6 +175,7 @@ const tweetReducer = (state = initialState, action) => {
         UnlikeTweetDone: false,
         UnlikeTweetError: action.error,
       };
+    */
 
     case ADD_COMMENT_REQUEST:
       return {
@@ -183,7 +197,30 @@ const tweetReducer = (state = initialState, action) => {
         ...state,
         AddcommentLoAdding: false,
         AddcommentDone: false,
-        AddcommentError: action.data,
+        AddcommentError: action.error,
+      };
+
+    case LOAD_MY_TWEET_REQUEST:
+      return {
+        ...state,
+        LoadmyTweetLoading: true,
+        LoadmyTweetDone: false,
+        LoadmyTweetError: null,
+      };
+    case LOAD_MY_TWEET_SUCCESS:
+      return {
+        ...state,
+        LoadmyTweetLoading: false,
+        LoadmyTweetDone: true,
+        mytweets: action.data,
+      };
+
+    case LOAD_MY_TWEET_FAIL:
+      return {
+        ...state,
+        LoadmyTweetLoading: false,
+        LoadmyTweetDone: false,
+        LoadmyTweetError: action.error,
       };
 
     default:
