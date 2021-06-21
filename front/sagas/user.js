@@ -136,5 +136,5 @@ export default function* userSaga() {
   yield takeLatest(SIGNUP_REQUEST, signupRequest);
   yield takeLatest(LOGOUT_REQUEST, logoutRequest);
   yield takeLatest(LOAD_INFO_REQUEST, loadInfoRequest);
-  yield takeLatest(CHANGE_NAME_REQUEST, changeNameRequest);
+  // yield takeLatest(CHANGE_NAME_REQUEST, changeNameRequest);
 }

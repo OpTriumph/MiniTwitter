@@ -6,10 +6,11 @@ import InfoBox from "../component/InfoBox.js";
 import TwitDialog from "../component/TwitDialog.js";
 import TwitMenu from "../component/TwitMenu.js";
 import { LOAD_INFO_REQUEST } from "../redux/user.js";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function Home() {
   const dispatch = useDispatch();
+  const myInfo = useSelector((state) => state.userReducer.myInfo);
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -34,7 +35,7 @@ export default function Home() {
         <InfoBox />
       </Grid>
 
-      <TwitDialog handleClose={handleClose} open={open} />
+      <TwitDialog handleClose={handleClose} open={open} user={myInfo} />
     </Container>
   );
 }
