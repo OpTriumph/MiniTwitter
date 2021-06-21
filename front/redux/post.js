@@ -76,7 +76,7 @@ const tweetReducer = (state = initialState, action) => {
         AddTweetLoadding: false,
         AddTweetDone: true,
         tweets: [action.data].concat(state.tweets),
-        mytweets: [action.data].concat(state.tweets),
+        mytweets: [action.data].concat(state.mytweets),
       };
 
     case ADD_TWEET_FAIL:
