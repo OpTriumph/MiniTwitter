@@ -29,7 +29,7 @@ router.post("/login", (req, res, next) => {
             model: Post,
             attributes: ["id"],
           },
-          {
+          /*{
             model: User,
             as: "Followings",
             attributes: ["id"],
@@ -38,7 +38,7 @@ router.post("/login", (req, res, next) => {
             model: User,
             as: "Followers",
             attributes: ["id"],
-          },
+          },*/
         ],
       });
       return res.status(200).json(userInfo);

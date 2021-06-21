@@ -26,7 +26,9 @@ function loginPost(data) {
       email: data.email,
       password: data.password,
     },
-    { withCredentials: true }
+    {
+      withCredentials: true,
+    }
   );
 }
 
@@ -73,7 +75,7 @@ function logoutPost() {
     { withCredentials: true }
   );
 }
-function* logoutRequest(action) {
+function* logoutRequest() {
   try {
     yield call(logoutPost);
     yield put({
@@ -82,18 +84,18 @@ function* logoutRequest(action) {
   } catch (error) {
     yield put({
       type: LOGOUT_FAIL,
-      error: error,
+      error: error.response,
     });
   }
 }
 
-function loadInfo(data) {
+function loadInfo() {
   return axios.get("http://localhost:3065/user", { withCredentials: true });
 }
 
-function* loadInfoRequest(action) {
+function* loadInfoRequest() {
   try {
-    const res = yield call(loadInfo, action.data, { withCredentials: true });
+    const res = yield call(loadInfo);
     yield put({
       type: LOAD_INFO_SUCCESS,
       data: res.data,
@@ -101,7 +103,7 @@ function* loadInfoRequest(action) {
   } catch (error) {
     yield put({
       type: LOAD_INFO_FAIL,
-      error: error.response.data,
+      error: error.response,
     });
   }
 }

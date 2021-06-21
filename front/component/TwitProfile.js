@@ -1,14 +1,14 @@
 import Paper from "@material-ui/core/Paper";
 import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
-import React, { useEffect } from "react";
+import React from "react";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 import ProfileDialog from "../component/ProfileDialog";
 import { useDispatch, useSelector } from "react-redux";
 import { LOGOUT_REQUEST } from "../redux/user";
-
+import { useEffect } from "react";
 import Router from "next/router";
 
 const useStyles = makeStyles((theme) => ({
@@ -17,7 +17,6 @@ const useStyles = makeStyles((theme) => ({
     margin: "auto",
   },
   profilebutton: {
-    padding: theme.spacing(1.5),
     borderRadius: 30,
     fontSize: 20,
     margin: theme.spacing(0.5),
@@ -25,54 +24,17 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function MyInfo({ user }) {
+export default function TwitProfile() {
+  const classes = useStyles();
   const dispatch = useDispatch();
+  const myInfo = useSelector((state) => state.userReducer.myInfo);
   const logoutDone = useSelector((state) => state.userReducer.logOutDone);
+  const [open, setOpen] = React.useState(false);
   useEffect(() => {
     if (logoutDone) {
       Router.replace("/");
     }
   }, [logoutDone]);
-
-  return (
-    <Grid container direction="row" spacing={2}>
-      <Grid item container direction="row" spacing={4} xs={10}>
-        <Grid item>
-          <Typography variant="body1" component="span">
-            <b>55</b> 팔로잉
-          </Typography>
-        </Grid>
-        <Grid item>
-          <Typography variant="body1" component="span">
-            <b>24</b> 팔로워
-          </Typography>
-        </Grid>
-        <Grid item>
-          <Typography variant="body1" component="span">
-            <b> {user.createdAt.slice(0, 10)}</b> 가입
-          </Typography>
-        </Grid>
-      </Grid>
-      <Grid item xs>
-        <Button
-          color="primary"
-          onClick={() =>
-            dispatch({
-              type: LOGOUT_REQUEST,
-            })
-          }
-        >
-          로그아웃
-        </Button>
-      </Grid>
-    </Grid>
-  );
-}
-
-export default function TwitProfile({ user }) {
-  const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
-  console.log("this", user);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -87,7 +49,7 @@ export default function TwitProfile({ user }) {
       <Grid item xs>
         <Paper variant="outlined" className={classes.paper}>
           <Typography>
-            <b>{user.nickname}</b>
+            <b>{myInfo ? myInfo.nickname : ""}</b>
           </Typography>
         </Paper>
 
@@ -104,10 +66,7 @@ export default function TwitProfile({ user }) {
             <Grid item container direction="row">
               <Grid item xs>
                 <Typography variant="h4">
-                  <b>{user.nickname}</b>
-                </Typography>
-                <Typography variant="h6" style={{ color: "#afafaf" }}>
-                  @{user.id}
+                  <b>{myInfo ? myInfo.nickname : ""}</b>
                 </Typography>
               </Grid>
 
@@ -138,8 +97,38 @@ export default function TwitProfile({ user }) {
                 미니트위터 자기소개란. Test
               </Typography>
             </Grid>
+            <Grid item container direction="row">
+              <Grid item container spacing={4} xs>
+                <Grid item>
+                  <Typography variant="body1" component="span">
+                    <b>0</b> 팔로잉
+                  </Typography>
+                </Grid>
+                <Grid item>
+                  <Typography variant="body1" component="span">
+                    <b>0</b> 팔로워
+                  </Typography>
+                </Grid>
+                <Grid item>
+                  <Typography variant="body1" component="span">
+                    <b> {myInfo ? myInfo.createdAt.slice(0, 10) : ""}</b> 가입
+                  </Typography>
+                </Grid>
+              </Grid>
 
-            <MyInfo user={user} />
+              <Grid item>
+                <Button
+                  color="primary"
+                  onClick={() =>
+                    dispatch({
+                      type: LOGOUT_REQUEST,
+                    })
+                  }
+                >
+                  로그아웃
+                </Button>
+              </Grid>
+            </Grid>
           </Grid>
         </Paper>
       </Grid>
